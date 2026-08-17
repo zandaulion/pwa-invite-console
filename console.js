@@ -6,84 +6,18 @@
    one origin reaches all of them and nothing here needs CORS. */
 'use strict';
 
-const APPS = [
-  {
-    id: 'trains',
-    name: 'Întârzieri',
-    api: '',                       // mounted at the listener's root
-    admin: '/admin/',
-    message: (inv, ttl) => [
-      'Salut! Îți trimit acces la Întârzieri — urmărește trenurile CFR și te',
-      'anunță când întârzie.',
-      '',
-      '1) Deschide linkul:',
-      inv.url,
-      '',
-      '2) Adaugă pagina pe ecranul principal:',
-      '• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ →',
-      '  „Adaugă la ecranul principal”',
-      '• iPhone (Safari): butonul de partajare → „Add to Home Screen”',
-      '',
-      '3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus',
-      'din nou — codul se completează singur. Apasă „Activează”.',
-      '',
-      `Codul e valabil ${ttl} zile și înregistrează un singur telefon.`,
-      'Notificările merg doar din aplicația instalată.',
-    ].join('\n'),
-  },
-  {
-    id: 'bp',
-    name: 'wBP Digitizer',
-    api: '/bp',
-    admin: '/bp-admin/',
-    message: (inv, ttl) => [
-      'Salut! Îți trimit acces la wBP Digitizer — o aplicație pentru urmărirea',
-      'tensiunii arteriale. Măsurătorile rămân pe telefonul tău, nu se trimit nicăieri.',
-      '',
-      '1) Deschide linkul:',
-      inv.url,
-      '',
-      '2) Pagina îți cere să adaugi aplicația pe ecranul principal. Fă asta:',
-      '• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ →',
-      '  „Adaugă la ecranul principal”',
-      '• iPhone (Safari): butonul de partajare → „Add to Home Screen”',
-      '',
-      '3) Apasă linkul de mai sus din nou. Dacă se deschide direct în aplicație,',
-      'gata — e activată.',
-      '',
-      '4) Dacă se deschide tot în browser (pe iPhone așa se întâmplă), apasă pe',
-      'pagină „Copiază codul”, deschide aplicația de pe ecranul principal, apasă',
-      'butonul camerei (cel cu lacăt) și lipește codul acolo.',
-      '',
-      'Linkul poate fi deschis de câte ori e nevoie — nu se consumă nimic până',
-      `nu introduci codul în aplicație. Valabil ${ttl} zile, un singur telefon.`,
-    ].join('\n'),
-  },
-  {
-    id: 'thermo',
-    name: 'Termometru',
-    api: '/thermo',
-    admin: '/thermo-admin/',
-    message: (inv, ttl) => [
-      'Salut! Îți trimit acces la Termometru — temperatura din casă, cu istoric',
-      'și alerte când iese din interval.',
-      '',
-      '1) Deschide linkul:',
-      inv.url,
-      '',
-      '2) Adaugă pagina pe ecranul principal:',
-      '• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ →',
-      '  „Adaugă la ecranul principal”',
-      '• iPhone (Safari): butonul de partajare → „Add to Home Screen”',
-      '',
-      '3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus',
-      'din nou — codul se completează singur. Apasă „Activează”.',
-      '',
-      `Codul e valabil ${ttl} zile și înregistrează un singur telefon.`,
-      'Notificările merg doar din aplicația instalată.',
-    ].join('\n'),
-  },
-];
+/* Every app this console fronts, loaded rather than compiled in: adding one is
+   an entry in apps.json plus a route on the listener, with no code change
+   here. An app qualifies by exposing the invite endpoints the others do --
+   see README. */
+let APPS = [];
+
+/* {link} is the invite url, {days} its lifetime. Everything else in the
+   message is that app's own words. */
+const fillMessage = (tpl, inv, ttl) => String(tpl)
+  .replaceAll('{link}', inv.url || '')
+  .replaceAll('{days}', String(inv.expires_in_days ?? ttl));
+
 
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g,
@@ -188,9 +122,8 @@ function renderTabs() {
     `<button data-app="${a.id}" aria-pressed="${a.id === app.id}">${esc(a.name)}</button>`).join('');
   $('apptabs').querySelectorAll('[data-app]').forEach((b) =>
     b.addEventListener('click', () => select(b.dataset.app)));
-  $('foot').innerHTML =
-    `Pagina fiecărei aplicații: ${APPS.map((a) =>
-      `<a href="${a.admin}">${esc(a.name)}</a>`).join(' · ')}`;
+  $('foot').textContent =
+    `${APPS.length} aplicații · consola este singura interfață de administrare.`;
 }
 
 function select(id) {
@@ -227,7 +160,7 @@ $('form-invite').addEventListener('submit', async (e) => {
 
 function showInvite(inv) {
   const box = $('invite-result');
-  const msg = app.message(inv, inv.expires_in_days ?? ttlDays);
+  const msg = fillMessage(app.message, inv, ttlDays);
   box.hidden = false;
   box.innerHTML = `
     ${inv.url ? `<div class="field">
@@ -360,7 +293,7 @@ function renderInvites(list) {
   $('invites').querySelectorAll('[data-msg]').forEach((b) =>
     b.addEventListener('click', () => {
       const i = invites.find((x) => String(x.id) === b.dataset.msg);
-      copy(app.message(i, ttlDays), b);
+      copy(fillMessage(app.message, i, ttlDays), b);
     }));
 
   $('invites').querySelectorAll('[data-unvite]').forEach((b) =>
@@ -381,5 +314,17 @@ if ('serviceWorker' in navigator) {
     .catch(() => { /* http, or the browser has no worker support */ });
 }
 
-select((location.hash || '').replace('#', '') || APPS[0].id);
-loadOverview();
+(async function boot() {
+  try {
+    APPS = await (await fetch('apps.json', { cache: 'no-cache' })).json();
+  } catch {
+    $('overview').innerHTML = '<p class="err">apps.json nu a putut fi citit.</p>';
+    return;
+  }
+  if (!APPS.length) {
+    $('overview').innerHTML = '<p class="empty">Nicio aplicație configurată.</p>';
+    return;
+  }
+  select((location.hash || '').replace('#', '') || APPS[0].id);
+  loadOverview();
+}());

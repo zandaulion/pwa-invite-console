@@ -1,0 +1,20 @@
+[
+  {
+    "id": "trains",
+    "name": "Întârzieri",
+    "api": "",
+    "message": "Salut! Îți trimit acces la Întârzieri — urmărește trenurile CFR și te\nanunță când întârzie.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ →\n  „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus\ndin nou — codul se completează singur. Apasă „Activează”.\n\nCodul e valabil {days} zile și înregistrează un singur telefon.\nNotificările merg doar din aplicația instalată."
+  },
+  {
+    "id": "bp",
+    "name": "wBP Digitizer",
+    "api": "/bp",
+    "message": "Salut! Îți trimit acces la wBP Digitizer — o aplicație pentru urmărirea\ntensiunii arteriale. Măsurătorile rămân pe telefonul tău, nu se trimit nicăieri.\n\n1) Deschide linkul:\n{link}\n\n2) Pagina îți cere să adaugi aplicația pe ecranul principal. Fă asta:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ →\n  „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Apasă linkul de mai sus din nou. Dacă se deschide direct în aplicație,\ngata — e activată.\n\n4) Dacă se deschide tot în browser (pe iPhone așa se întâmplă), apasă pe\npagină „Copiază codul”, deschide aplicația de pe ecranul principal, apasă\nbutonul camerei (cel cu lacăt) și lipește codul acolo.\n\nLinkul poate fi deschis de câte ori e nevoie — nu se consumă nimic până\nnu introduci codul în aplicație. Valabil {days} zile, un singur telefon."
+  },
+  {
+    "id": "thermo",
+    "name": "Termometru",
+    "api": "/thermo",
+    "message": "Salut! Îți trimit acces la Termometru — temperatura din casă, cu istoric\nși alerte când iese din interval.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ →\n  „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus\ndin nou — codul se completează singur. Apasă „Activează”.\n\nCodul e valabil {days} zile și înregistrează un singur telefon.\nNotificările merg doar din aplicația instalată."
+  }
+]

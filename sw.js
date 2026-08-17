@@ -7,7 +7,8 @@
 const VERSION = '__BUILD_VERSION__';
 const CACHE = 'console-' + VERSION;
 const SHELL = ['./', 'index.html', 'admin.css', 'console.css', 'console.js',
-               'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png'];
+               'apps.json', 'manifest.webmanifest',
+               'icons/icon-192.png', 'icons/icon-512.png'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil((async () => {
