@@ -227,11 +227,24 @@ function renderDevices(devices) {
           · văzut ultima dată ${esc(when(d.last_seen))}
         </div>
       </div>
+      <button class="btn small ghost" data-rename="${d.id}">Redenumește</button>
       <button class="btn small ghost" data-revoke="${d.id}" data-to="${d.revoked ? 0 : 1}">
         ${d.revoked ? 'Restaurează' : 'Revocă'}
       </button>
       <button class="btn small danger" data-forget="${d.id}">Șterge</button>
     </div>`).join('');
+
+  /* A device is named after the invite that registered it, which is whoever
+     the invite was minted for rather than whoever redeemed it. */
+  $('devices').querySelectorAll('[data-rename]').forEach((b) =>
+    b.addEventListener('click', async () => {
+      const row = b.closest('.item').querySelector('.name');
+      const now = row ? row.firstChild.textContent.trim() : '';
+      const label = prompt('Eticheta dispozitivului (ex. „Ana — iPhone”)', now);
+      if (label === null) return;
+      await api(`/api/admin/devices/${b.dataset.rename}/label`, { label });
+      load();
+    }));
 
   $('devices').querySelectorAll('[data-revoke]').forEach((b) =>
     b.addEventListener('click', async () => {

@@ -48,6 +48,7 @@ answering, under its prefix:
 |---|---|
 | `GET /api/admin/devices` | `{devices: [{id, label, created_at, last_seen, revoked, has_push}]}` |
 | `POST /api/admin/devices/{id}/revoke` | body `{revoked: bool}` |
+| `POST /api/admin/devices/{id}/label` | body `{label}` |
 | `DELETE /api/admin/devices/{id}` | |
 | `GET /api/admin/invites` | `{invites: [{id, label, created_at, expires_at, used_at, device_id, code, url}], ttl_days}` |
 | `POST /api/admin/invites` | body `{label}` → `{code, url, expires_in_days}` |
@@ -57,9 +58,12 @@ answering, under its prefix:
 the plaintext is wiped at that point, and the console hides the copy buttons
 accordingly.
 
-Anything one app has and the others do not — renaming a device, pruning,
-push sources — stays in that app's `admin.sh`. Growing this page into a
-superset would break it every time one of them changed.
+Pruning is deliberately not here. `admin.sh prune` and `prune-devices` delete
+in bulk with nothing to confirm per row, which is a poor fit for a page that
+fronts several databases at once; typing the app's name is its own
+confirmation. Anything only one app has — Termometru's push sources — stays in
+its own `admin.sh` too. Growing this page into a superset would break it every
+time one of them changed.
 
 ## Security
 
