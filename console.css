@@ -1,0 +1,18 @@
+/* Additions on top of the per-app admin stylesheet, which this page shares so
+   the four look like one thing. */
+.overview{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:10px;margin:0 0 18px}
+.ov-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.ov-card .name{font-weight:600}
+.ov-card .nums{font-size:.85rem;color:var(--muted)}
+.ov-card.down .nums{color:var(--bad)}
+
+.apptabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+.apptabs button{font:inherit;font-size:.9rem;font-weight:600;cursor:pointer;
+  padding:9px 16px;border-radius:999px;border:1px solid var(--border);
+  background:var(--surface);color:var(--text)}
+.apptabs button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);
+  color:#fff}
+.foot{margin-top:26px;text-align:center;font-size:.8rem;color:var(--muted)}
+.foot a{color:var(--muted)}

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Consolă admin</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="admin.css">
+<link rel="stylesheet" href="console.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div>
+      <h1>Consolă admin</h1>
+      <p class="sub">Doar prin tailnet. Accesul la această pagină este
+        autentificarea — nu există parolă și nu e servită pe adresa publică.</p>
+    </div>
+  </header>
+
+  <div class="overview" id="overview"></div>
+
+  <nav class="apptabs" id="apptabs"></nav>
+
+  <section class="block">
+    <h2>Invitație nouă</h2>
+    <div class="card">
+      <form class="row-form" id="form-invite">
+        <input id="invite-label" placeholder="Pentru cine? (opțional)"
+               autocomplete="off" aria-label="Etichetă">
+        <button class="btn" type="submit">Creează invitație</button>
+      </form>
+      <div id="invite-result" hidden></div>
+      <p class="err" id="invite-err" hidden></p>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Dispozitive</h2>
+    <div class="card" id="devices"><p class="empty">Se încarcă…</p></div>
+  </section>
+
+  <section class="block">
+    <h2>Invitații</h2>
+    <div class="card" id="invites"><p class="empty">Se încarcă…</p></div>
+  </section>
+
+  <p class="foot" id="foot"></p>
+
+</div>
+<script src="console.js"></script>
+</body>
+</html>
