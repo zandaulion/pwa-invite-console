@@ -85,7 +85,7 @@ tailscale serve --bg --https=443 http://127.0.0.1:80
 ```
 
 That is `serve`, not `funnel`: reachable from the tailnet and nowhere else.
-Open `https://<node>.<tailnet>.ts.net/console/` and install from there; the
+Open `https://<node>.<tailnet>.ts.net/invites/` and install from there; the
 plain-HTTP address keeps working as a page, minus the worker.
 
 Only the shell is cached, and never anything under `/api/` — a stale device
@@ -94,5 +94,5 @@ list is worse than none, and those responses carry invite codes.
 ## Deploy
 
 ```bash
-./deploy.sh          # -> /var/www/console, served at /console/ on the tailnet
+./deploy.sh          # -> /var/www/pwa-invite-console, served at /invites/
 ```

@@ -3,7 +3,7 @@
 # apps, and those exist only on the listener that injects X-Admin.
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DEST="${DEST:-/var/www/console}"
+DEST="${DEST:-/var/www/pwa-invite-console}"
 
 sudo mkdir -p "$DEST"
 sudo chown "$(id -un):$(id -gn)" "$DEST"
