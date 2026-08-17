@@ -371,5 +371,15 @@ function renderInvites(list) {
     }));
 }
 
+/* Registered relative to this file, so the worker's scope is the console's
+   own directory and nothing else on the listener is touched. Needs a secure
+   context: the tailnet is served over HTTPS by `tailscale serve`, and over
+   plain HTTP this simply does nothing. */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' })
+    .then((reg) => reg.update())
+    .catch(() => { /* http, or the browser has no worker support */ });
+}
+
 select((location.hash || '').replace('#', '') || APPS[0].id);
 loadOverview();

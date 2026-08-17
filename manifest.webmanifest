@@ -1,0 +1,17 @@
+{
+  "id": "/console/",
+  "name": "Consolă admin",
+  "short_name": "Consolă",
+  "description": "Invitații și dispozitive pentru Întârzieri, wBP Digitizer și Termometru.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f5f7fb",
+  "theme_color": "#0f172a",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

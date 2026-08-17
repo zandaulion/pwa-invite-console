@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#0f172a"/>
+  <!-- three stacked bars: the three apps this console fronts -->
+  <g fill="none" stroke-linecap="round" stroke-width="34">
+    <path d="M136 176h240" stroke="#0284c7"/>
+    <path d="M136 256h240" stroke="#38bdf8"/>
+    <path d="M136 336h240" stroke="#7dd3fc"/>
+  </g>
+  <circle cx="136" cy="176" r="26" fill="#f8fafc"/>
+  <circle cx="256" cy="256" r="26" fill="#f8fafc"/>
+  <circle cx="376" cy="336" r="26" fill="#f8fafc"/>
+</svg>
