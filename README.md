@@ -91,6 +91,11 @@ plain-HTTP address keeps working as a page, minus the worker.
 Only the shell is cached, and never anything under `/api/` — a stale device
 list is worse than none, and those responses carry invite codes.
 
+Serve the files with `Cache-Control: no-cache, must-revalidate`. Without it
+they carry only an ETag, and a browser may cache heuristically — which served
+a stale stylesheet through an entire deploy here. They are a few kilobytes on
+a local network; revalidating costs nothing.
+
 ## Deploy
 
 ```bash

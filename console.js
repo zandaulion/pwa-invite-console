@@ -92,11 +92,14 @@ const until = (iso) => {
 };
 
 /* -------------------------------------------------------------- overview -- */
-/* Counts for every app at once, so the console opens on the question it exists
-   to answer: is anything waiting for me. One app being down must not take the
-   others with it, hence the per-app catch. */
+/* Counts for every app, carried in the picker itself: a card each took most of
+   a phone screen before the first device row, and this is a tool for glancing
+   at one app and acting on it. One app being down must not take the others
+   with it, hence the per-app catch. */
+const summaries = new Map();
+
 async function loadOverview() {
-  const cards = await Promise.all(APPS.map(async (a) => {
+  await Promise.all(APPS.map(async (a) => {
     try {
       const [d, i] = await Promise.all([
         fetch(`${a.api}/api/admin/devices`).then((r) => r.json()),
@@ -106,32 +109,34 @@ async function loadOverview() {
       const pending = i.invites.filter(
         (x) => !x.used_at && new Date(x.expires_at).getTime() > now).length;
       const active = d.devices.filter((x) => !x.revoked).length;
-      return `<button class="ov-card" data-go="${a.id}" aria-pressed="${a.id === app.id}">
-          <span class="name">${esc(a.name)}</span>
-          <span class="nums">${esc(plural(active, 'dispozitiv', 'dispozitive'))}</span>
-          <span class="nums pend">${pending
-            ? esc(plural(pending, 'invitație în așteptare', 'invitații în așteptare'))
-            : 'nicio invitație'}</span>
-        </button>`;
+      summaries.set(a.id, {
+        short: `${active} · ${pending}`,
+        long: `${plural(active, 'dispozitiv', 'dispozitive')} · ${pending
+          ? plural(pending, 'invitație în așteptare', 'invitații în așteptare')
+          : 'nicio invitație în așteptare'}`,
+      });
     } catch {
-      return `<button class="ov-card down" data-go="${a.id}" aria-pressed="${a.id === app.id}">
-          <span class="name">${esc(a.name)}</span>
-          <span class="nums">nu răspunde</span>
-        </button>`;
+      summaries.set(a.id, { short: '!', long: 'nu răspunde' });
     }
   }));
-  $('overview').innerHTML = cards.join('');
-  $('overview').querySelectorAll('[data-go]').forEach((b) =>
-    b.addEventListener('click', () => select(b.dataset.go)));
-  renderTabs();                      // mark whichever card is current
+  renderPicker();
 }
 
-/* ------------------------------------------------------------------ tabs -- */
-/* The cards above are the selector -- a separate tab row listed the same three
-   names a second time, which on a phone was six rows to say three things. */
+/* One line: the app, and what is waiting on it. */
+function renderPicker() {
+  const sel = $('appsel');
+  sel.innerHTML = APPS.map((a) => {
+    const s = summaries.get(a.id);
+    return `<option value="${esc(a.id)}"${a.id === app.id ? ' selected' : ''}>${
+      esc(a.name)}${s ? ` — ${s.short}` : ''}</option>`;
+  }).join('');
+  const mine = summaries.get(app.id);
+  $('appsub').textContent = mine ? mine.long : 'se încarcă…';
+  $('appsub').classList.toggle('down', !!mine && mine.long === 'nu răspunde');
+}
+
 function renderTabs() {
-  $('overview').querySelectorAll('[data-go]').forEach((b) =>
-    b.setAttribute('aria-pressed', String(b.dataset.go === app.id)));
+  renderPicker();
   $('foot').textContent =
     `${APPS.length} aplicații · consola este singura interfață de administrare.`;
 }
@@ -348,6 +353,7 @@ if ('serviceWorker' in navigator) {
     $('overview').innerHTML = '<p class="empty">Nicio aplicație configurată.</p>';
     return;
   }
+  $('appsel').addEventListener('change', (e) => select(e.target.value));
   select((location.hash || '').replace('#', '') || APPS[0].id);
   loadOverview();
 }());
