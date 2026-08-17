@@ -66,6 +66,12 @@ async function copy(text, btn) {
   }
 }
 
+/* Romanian counts: one form for 1, another for 2..19, and "de" from 20 up.
+   Rendering "1 dispozitive" is the sort of thing that makes a tool feel
+   unfinished. */
+const plural = (n, one, few) =>
+  `${n} ${n === 1 ? one : n % 100 >= 20 || n % 100 === 0 ? `de ${few}` : few}`;
+
 const when = (iso) => {
   if (!iso) return 'niciodată';
   const d = new Date(iso);
@@ -100,12 +106,15 @@ async function loadOverview() {
       const pending = i.invites.filter(
         (x) => !x.used_at && new Date(x.expires_at).getTime() > now).length;
       const active = d.devices.filter((x) => !x.revoked).length;
-      return `<button class="ov-card" data-go="${a.id}">
+      return `<button class="ov-card" data-go="${a.id}" aria-pressed="${a.id === app.id}">
           <span class="name">${esc(a.name)}</span>
-          <span class="nums">${active} dispozitive · ${pending} invitații în așteptare</span>
+          <span class="nums">${esc(plural(active, 'dispozitiv', 'dispozitive'))}</span>
+          <span class="nums pend">${pending
+            ? esc(plural(pending, 'invitație în așteptare', 'invitații în așteptare'))
+            : 'nicio invitație'}</span>
         </button>`;
     } catch {
-      return `<button class="ov-card down" data-go="${a.id}">
+      return `<button class="ov-card down" data-go="${a.id}" aria-pressed="${a.id === app.id}">
           <span class="name">${esc(a.name)}</span>
           <span class="nums">nu răspunde</span>
         </button>`;
@@ -114,14 +123,15 @@ async function loadOverview() {
   $('overview').innerHTML = cards.join('');
   $('overview').querySelectorAll('[data-go]').forEach((b) =>
     b.addEventListener('click', () => select(b.dataset.go)));
+  renderTabs();                      // mark whichever card is current
 }
 
 /* ------------------------------------------------------------------ tabs -- */
+/* The cards above are the selector -- a separate tab row listed the same three
+   names a second time, which on a phone was six rows to say three things. */
 function renderTabs() {
-  $('apptabs').innerHTML = APPS.map((a) =>
-    `<button data-app="${a.id}" aria-pressed="${a.id === app.id}">${esc(a.name)}</button>`).join('');
-  $('apptabs').querySelectorAll('[data-app]').forEach((b) =>
-    b.addEventListener('click', () => select(b.dataset.app)));
+  $('overview').querySelectorAll('[data-go]').forEach((b) =>
+    b.setAttribute('aria-pressed', String(b.dataset.go === app.id)));
   $('foot').textContent =
     `${APPS.length} aplicații · consola este singura interfață de administrare.`;
 }

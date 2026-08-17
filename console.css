@@ -1,18 +1,41 @@
 /* Additions on top of the per-app admin stylesheet, which this page shares so
-   the four look like one thing. */
-.overview{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
-  gap:10px;margin:0 0 18px}
-.ov-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;
-  padding:12px 14px;display:flex;flex-direction:column;gap:4px}
-.ov-card .name{font-weight:600}
-.ov-card .nums{font-size:.85rem;color:var(--muted)}
-.ov-card.down .nums{color:var(--bad)}
+   the two look like one thing. */
 
-.apptabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}
-.apptabs button{font:inherit;font-size:.9rem;font-weight:600;cursor:pointer;
-  padding:9px 16px;border-radius:999px;border:1px solid var(--border);
-  background:var(--surface);color:var(--text)}
-.apptabs button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);
-  color:#fff}
+/* The app cards are the selector, not a summary sitting above one. Three of
+   them fit a phone across; the name wraps rather than the row. */
+/* 84px so three still fit the narrowest phone worth caring about: .wrap pads
+   18px a side, so a 320px screen leaves 284, and 3x84 plus two 8px gaps is
+   268. At 104 they broke to two rows on a Fold's cover screen, which is the
+   wrap this whole row replaced. Names wrap inside a card instead, and the grid
+   keeps the cards a matched height. */
+.overview{display:grid;grid-template-columns:repeat(auto-fit,minmax(84px,1fr));
+  gap:8px;margin:0 0 20px}
+.ov-card{font:inherit;text-align:left;cursor:pointer;
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:11px 9px;display:flex;flex-direction:column;gap:2px;
+  container-type:inline-size;
+  transition:border-color .12s,background .12s}
+/* Scaled to the card rather than broken to fit it: at a fixed size a 10-letter
+   name split as "Întârzie/ri" on a narrow screen. anywhere stays only as a
+   backstop for a name longer than any of these. */
+/* Sized against the card, not the viewport: the card's width is what the name
+   has to fit, and cqw says so directly instead of my re-deriving it from the
+   screen width and the container's padding every time either changes. */
+.ov-card .name{font-weight:600;font-size:clamp(.58rem,14cqw,.92rem);line-height:1.2;
+  color:var(--text);overflow-wrap:anywhere}
+.ov-card .nums{font-size:.76rem;color:var(--muted);line-height:1.35}
+.ov-card .pend{color:var(--muted)}
+.ov-card:hover{border-color:color-mix(in srgb,var(--accent) 40%,var(--border))}
+
+/* Selected: filled, so it reads as "you are here" rather than "this one is
+   different". */
+.ov-card[aria-pressed="true"]{background:var(--accent);border-color:var(--accent)}
+.ov-card[aria-pressed="true"] .name,
+.ov-card[aria-pressed="true"] .nums{color:#fff}
+.ov-card[aria-pressed="true"] .pend{color:color-mix(in srgb,#fff 82%,transparent)}
+
+/* An app that is not answering says so instead of showing stale counts. */
+.ov-card.down .nums{color:var(--bad)}
+.ov-card.down[aria-pressed="true"] .nums{color:#fff}
+
 .foot{margin-top:26px;text-align:center;font-size:.8rem;color:var(--muted)}
-.foot a{color:var(--muted)}
