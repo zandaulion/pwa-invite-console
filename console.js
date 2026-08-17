@@ -27,6 +27,9 @@ let app = APPS[0];
 let ttlDays = 7;
 let invites = [];
 
+/* `method` is explicit for anything that is not a GET. It used to be inferred
+   from whether a body was present, so a POST with nothing to send -- revoking
+   an invite -- went out as a GET and came back 405. */
 const api = (path, body, method) =>
   fetch(app.api + path, {
     method: method || (body ? 'POST' : 'GET'),
@@ -71,6 +74,17 @@ async function copy(text, btn) {
    unfinished. */
 const plural = (n, one, few) =>
   `${n} ${n === 1 ? one : n % 100 >= 20 || n % 100 === 0 ? `de ${few}` : few}`;
+
+/* Wraps a click handler so a failed request says so. Without this the promise
+   rejects into nothing and the button simply appears inert, which is exactly
+   how the revoke above went unnoticed. */
+const act = (fn) => async (...args) => {
+  try {
+    await fn(...args);
+  } catch (ex) {
+    alert(ex.message || 'Cererea a eșuat.');
+  }
+};
 
 const when = (iso) => {
   if (!iso) return 'niciodată';
@@ -252,32 +266,32 @@ function renderDevices(devices) {
   /* A device is named after the invite that registered it, which is whoever
      the invite was minted for rather than whoever redeemed it. */
   $('devices').querySelectorAll('[data-rename]').forEach((b) =>
-    b.addEventListener('click', async () => {
+    b.addEventListener('click', act(async () => {
       const row = b.closest('.item').querySelector('.name');
       const now = row ? row.firstChild.textContent.trim() : '';
       const label = prompt('Eticheta dispozitivului (ex. „Ana — iPhone”)', now);
       if (label === null) return;
       await api(`/api/admin/devices/${b.dataset.rename}/label`, { label });
       load();
-    }));
+    })));
 
   $('devices').querySelectorAll('[data-revoke]').forEach((b) =>
-    b.addEventListener('click', async () => {
+    b.addEventListener('click', act(async () => {
       const on = b.dataset.to === '1';
       if (on && !confirm(`Revoci acest dispozitiv din ${app.name}? `
                        + 'Pierde imediat accesul și nu mai primește notificări.')) return;
       await api(`/api/admin/devices/${b.dataset.revoke}/revoke`, { revoked: on });
       load(); loadOverview();
-    }));
+    })));
 
   $('devices').querySelectorAll('[data-forget]').forEach((b) =>
-    b.addEventListener('click', async () => {
+    b.addEventListener('click', act(async () => {
       if (!confirm(`Ștergi definitiv acest dispozitiv din ${app.name}? `
                  + 'Datele lui de pe server se pierd și va avea nevoie de o '
                  + 'invitație nouă.')) return;
       await api(`/api/admin/devices/${b.dataset.forget}`, null, 'DELETE');
       load(); loadOverview();
-    }));
+    })));
 }
 
 function renderInvites(list) {
@@ -325,11 +339,11 @@ function renderInvites(list) {
     }));
 
   $('invites').querySelectorAll('[data-unvite]').forEach((b) =>
-    b.addEventListener('click', async () => {
+    b.addEventListener('click', act(async () => {
       if (!confirm('Anulezi această invitație? Codul nu va mai putea fi folosit.')) return;
-      await api(`/api/admin/invites/${b.dataset.unvite}/revoke`);
+      await api(`/api/admin/invites/${b.dataset.unvite}/revoke`, null, 'POST');
       load(); loadOverview();
-    }));
+    })));
 }
 
 /* Registered relative to this file, so the worker's scope is the console's
