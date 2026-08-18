@@ -16,5 +16,11 @@
     "name": "Termometru",
     "api": "/thermo",
     "message": "Salut! Îți trimit acces la Termometru — temperatura din casă, cu istoric\nși alerte când iese din interval.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ →\n  „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus\ndin nou — codul se completează singur. Apasă „Activează”.\n\nCodul e valabil {days} zile și înregistrează un singur telefon.\nNotificările merg doar din aplicația instalată."
+  },
+  {
+    "id": "olx",
+    "name": "OLX Deals",
+    "api": "/olx",
+    "message": "Salut! Îți trimit acces la OLX Deals — alerte și oferte bune în timp real.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ →\n  „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus\ndin nou — codul se completează singur. Apasă „Activează”.\n\nCodul e valabil {days} zile și înregistrează un singur telefon.\nNotificările merg doar din aplicația instalată."
   }
 ]
