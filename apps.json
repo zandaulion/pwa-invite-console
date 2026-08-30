@@ -28,5 +28,13 @@
     "name": "Pocket Omaha",
     "api": "/omaha",
     "message": "Salut! Îți trimit acces la Pocket Omaha — monitorizare sănătate financiară și moat-uri pentru acțiuni.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n• Android (Chrome): butonul „Instalează” sau ⋮ → „Adaugă la ecranul principal”\n\n3) Deschide aplicația de pe ecranul principal și apasă „Activează”.\n\nCodul este valabil {days} zile și înregistrează un singur telefon."
+  },
+  {
+    "id": "plate",
+    "name": "Plate",
+    "api": "/plate",
+    "message": "Salut! Îți trimit acces la Plate — jurnal de calorii și macronutrienți.\nFotografiezi mâncarea, corectezi porția dacă știi cât a fost, gata.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ →\n  „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus\ndin nou — codul se completează singur. Apasă „Continue”.\n\nAplicația e în engleză. Codul e valabil {days} zile și creează un singur\ncont — poți adăuga apoi și alte telefoane, din aplicație.\n\nCa să știi: pozele cu mâncarea se trimit la Google ca să fie analizate.\nRestul — jurnalul, greutatea, pozele salvate — stă pe serverul meu și\nnu pleacă nicăieri. Nu are reclame și nu urmărește nimic.",
+    "push": false,
+    "invite_note": "Creează un cont nou, expiră în {days} zile și se poate folosi o singură dată. Alte telefoane se adaugă din aplicație, nu cu o invitație nouă."
   }
 ]

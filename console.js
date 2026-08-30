@@ -12,6 +12,22 @@
    see README. */
 let APPS = [];
 
+/* What an invite actually does differs between apps, so the sentence under a
+   new code is the app's own if it supplies one. The default describes the
+   original three: one device, with a grace period that re-links the same
+   handset rather than registering a second. Plate, for instance, creates an
+   account and has no such grace period, so saying this of it would be wrong.
+
+   Apps may also declare `push: false`, which suppresses the "no notifications"
+   badge -- an app that never sends any is not missing them. */
+const DEFAULT_INVITE_NOTE =
+  'Un singur dispozitiv, expiră în {days} zile. În prima oră de la folosire '
+  + 'codul re-leagă <em>același</em> dispozitiv, nu înregistrează altul.';
+
+const inviteNote = (inv) =>
+  String(app.invite_note || DEFAULT_INVITE_NOTE)
+    .replaceAll('{days}', esc(inv.expires_in_days ?? ttlDays));
+
 /* {link} is the invite url, {days} its lifetime. Everything else in the
    message is that app's own words. */
 const fillMessage = (tpl, inv, ttl) => String(tpl)
@@ -209,11 +225,7 @@ function showInvite(inv) {
       <a class="btn small ghost" target="_blank" rel="noopener"
          href="https://wa.me/?text=${encodeURIComponent(msg)}">WhatsApp</a>
     </div>` : ''}
-    <p class="note">
-      Un singur dispozitiv, expiră în ${esc(inv.expires_in_days ?? ttlDays)} zile.
-      În prima oră de la folosire codul re-leagă <em>același</em> dispozitiv, nu
-      înregistrează altul.
-    </p>`;
+    <p class="note">${inviteNote(inv)}</p>`;
   box.querySelectorAll('[data-copy]').forEach((b) =>
     b.addEventListener('click', () => copy(b.dataset.copy, b)));
   box.querySelectorAll('[data-copy-msg]').forEach((b) =>
@@ -249,7 +261,8 @@ function renderDevices(devices) {
       <div class="grow">
         <div class="name">${esc(d.label || `Dispozitiv ${d.id}`)}
           <span class="pill ${d.revoked ? 'bad' : 'ok'}">${d.revoked ? 'revocat' : 'activ'}</span>
-          ${d.has_push ? '' : '<span class="pill warn">fără notificări</span>'}
+          ${app.push === false || d.has_push
+            ? '' : '<span class="pill warn">fără notificări</span>'}
         </div>
         <div class="meta">
           #${d.id} · înregistrat ${esc(when(d.created_at))}
