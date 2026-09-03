@@ -58,5 +58,10 @@
 
 </div>
 <script src="console.js"></script>
+<script type="module">
+  // Its own module, so the app script can stay a classic script.
+  import { installUpdates } from './pwa-update.js';
+  installUpdates({ appName: 'Invite Console', scriptUrl: 'sw.js' });
+</script>
 </body>
 </html>

@@ -10,6 +10,8 @@ const SHELL = ['./', 'index.html', 'admin.css', 'console.css', 'console.js',
                'apps.json', 'manifest.webmanifest',
                'icons/icon-192.png', 'icons/icon-512.png'];
 
+importScripts('sw-update.js');
+
 self.addEventListener('install', (e) => {
   e.waitUntil((async () => {
     const c = await caches.open(CACHE);
@@ -24,6 +26,9 @@ self.addEventListener('activate', (e) => {
     await Promise.all(keys.filter((k) => k.startsWith('console-') && k !== CACHE)
                           .map((k) => caches.delete(k)));
     await self.clients.claim();
+    // Tell the open windows rather than reloading them from under whatever
+    // the person was doing. Each page decides when it is safe.
+    await announceUpdate();
   })());
 });
 
