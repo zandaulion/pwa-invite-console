@@ -56,5 +56,11 @@
     "name": "Mișcare",
     "api": "/miscare",
     "message": "Salut! Îți trimit acces la Mișcare — exerciții fără fricțiuni, de la zero, în ritmul tău.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ → „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus din nou — codul se completează singur. Apasă „Activează”.\n\nCodul este valabil {days} zile și înregistrează un singur telefon."
+  },
+  {
+    "id": "faceslice",
+    "name": "Faceslice",
+    "api": "/faceslice",
+    "message": "Salut! Îți trimit acces la Faceslice — dintr-o poză, un portret în straturi, gata de tăiat pe CNC.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ → „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus din nou — codul se completează singur. Apasă „Activează”.\n\nCodul este valabil {days} zile și înregistrează un singur telefon."
   }
 ]
