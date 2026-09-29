@@ -25,8 +25,10 @@ const DEFAULT_INVITE_NOTE =
   + 'codul re-leagă <em>același</em> dispozitiv, nu înregistrează altul.';
 
 const inviteNote = (inv) =>
-  String(app.invite_note || DEFAULT_INVITE_NOTE)
+  String(app.invite_notes?.[inv.role] || app.invite_note || DEFAULT_INVITE_NOTE)
     .replaceAll('{days}', esc(inv.expires_in_days ?? ttlDays));
+
+const messageFor = (inv) => app.invite_messages?.[inv.role] || app.message;
 
 /* {link} is the invite url, {days} its lifetime. Everything else in the
    message is that app's own words. */
@@ -42,6 +44,7 @@ const esc = (s) => String(s ?? '').replace(/[&<>"']/g,
 let app = APPS[0];
 let ttlDays = 7;
 let invites = [];
+let inviteOptions = { children: [] };
 
 /* `method` is explicit for anything that is not a GET. It used to be inferred
    from whether a body was present, so a POST with nothing to send -- revoking
@@ -53,7 +56,7 @@ const api = (path, body, method) =>
     body: body ? JSON.stringify(body) : undefined,
   }).then(async (r) => {
     const data = await r.json().catch(() => ({}));
-    if (!r.ok) throw new Error(data.detail || `Cererea a eșuat (${r.status})`);
+    if (!r.ok) throw new Error(data.error || data.detail || `Cererea a eșuat (${r.status})`);
     return data;
   });
 
@@ -177,7 +180,57 @@ function select(id) {
   $('invite-result').hidden = true;
   $('invite-err').hidden = true;
   renderTabs();
+  configureInviteAccess();
   load();
+}
+
+function defaultAccessExpiry() {
+  const now = new Date();
+  const year = now.getMonth() >= 6 ? now.getFullYear() + 1 : now.getFullYear();
+  return `${year}-06-30`;
+}
+
+function selectedProfile() {
+  return app.invite_profiles?.find((profile) => profile.value === $('invite-role').value);
+}
+
+function updateInviteProfile() {
+  const profile = selectedProfile();
+  const needsChild = !!profile?.requires_child;
+  const readOnly = profile && profile.value !== 'treasurer';
+  $('invite-child-wrap').hidden = !needsChild;
+  $('invite-expiry-wrap').hidden = !readOnly;
+  $('invite-role-note').textContent = profile?.description || '';
+  $('invite-child').required = needsChild;
+  $('invite-expiry').required = !!readOnly;
+}
+
+async function configureInviteAccess() {
+  const profiles = app.invite_profiles;
+  $('invite-access').hidden = !profiles?.length;
+  inviteOptions = { children: [] };
+  if (!profiles?.length) {
+    $('invite-child').required = false;
+    $('invite-expiry').required = false;
+    return;
+  }
+  $('invite-role').innerHTML = profiles.map((profile) =>
+    `<option value="${esc(profile.value)}">${esc(profile.label)}</option>`).join('');
+  $('invite-expiry').value = defaultAccessExpiry();
+  updateInviteProfile();
+  const selectedApp = app;
+  try {
+    const options = await api(app.invite_options_endpoint || '/api/admin/invite-options');
+    if (app !== selectedApp) return;
+    inviteOptions = options;
+    $('invite-child').innerHTML = (options.children || []).map((child) =>
+      `<option value="${esc(child.id)}">${esc(child.name)}</option>`).join('');
+    updateInviteProfile();
+  } catch (error) {
+    if (app !== selectedApp) return;
+    $('invite-child').innerHTML = '';
+    $('invite-role-note').textContent = `Opțiunile nu au putut fi încărcate: ${error.message}`;
+  }
 }
 
 /* --------------------------------------------------------------- invites -- */
@@ -189,7 +242,14 @@ $('form-invite').addEventListener('submit', async (e) => {
   btn.disabled = true;
   btn.textContent = 'Se creează…';
   try {
-    const inv = await api('/api/admin/invites', { label: $('invite-label').value.trim() });
+    const body = { label: $('invite-label').value.trim() };
+    const profile = selectedProfile();
+    if (profile) {
+      body.role = profile.value;
+      if (profile.requires_child) body.childId = $('invite-child').value;
+      if (profile.value !== 'treasurer') body.accessExpiresAt = $('invite-expiry').value;
+    }
+    const inv = await api('/api/admin/invites', body);
     $('invite-label').value = '';
     showInvite(inv);
     await load();
@@ -205,7 +265,7 @@ $('form-invite').addEventListener('submit', async (e) => {
 
 function showInvite(inv) {
   const box = $('invite-result');
-  const msg = fillMessage(app.message, inv, ttlDays);
+  const msg = fillMessage(messageFor(inv), inv, ttlDays);
   box.hidden = false;
   box.innerHTML = `
     ${inv.url ? `<div class="field">
@@ -261,12 +321,15 @@ function renderDevices(devices) {
       <div class="grow">
         <div class="name">${esc(d.label || `Dispozitiv ${d.id}`)}
           <span class="pill ${d.revoked ? 'bad' : 'ok'}">${d.revoked ? 'revocat' : 'activ'}</span>
+          ${d.role && d.role !== 'treasurer' ? `<span class="pill">${esc(d.role === 'parent' ? 'părinte' : 'auditor')}</span>` : ''}
           ${app.push === false || d.has_push
             ? '' : '<span class="pill warn">fără notificări</span>'}
         </div>
         <div class="meta">
           #${d.id} · înregistrat ${esc(when(d.created_at))}
           · văzut ultima dată ${esc(when(d.last_seen))}
+          ${d.child_label ? ` · ${esc(d.child_label)}` : ''}
+          ${d.access_expires_at ? ` · acces până la ${esc(new Date(d.access_expires_at).toLocaleDateString('ro-RO'))}` : ''}
         </div>
       </div>
       <button class="btn small ghost" data-rename="${d.id}">Redenumește</button>
@@ -325,6 +388,7 @@ function renderInvites(list) {
         <div class="grow">
           <div class="name">${esc(i.label || 'fără etichetă')}
             <span class="pill ${state[0]}">${esc(state[1])}</span>
+            ${i.role && i.role !== 'treasurer' ? `<span class="pill">${esc(i.role === 'parent' ? 'părinte' : 'auditor')}</span>` : ''}
           </div>
           <div class="meta">
             #${i.id} · creată ${esc(when(i.created_at))}
@@ -334,6 +398,7 @@ function renderInvites(list) {
               ? (i.device_id ? `· dispozitiv #${i.device_id}` : '· dispozitiv șters')
               : `· expiră ${esc(until(i.expires_at))}`}
             ${live ? `· <span class="code">${esc(i.code)}</span>` : ''}
+            ${i.child_label ? ` · ${esc(i.child_label)}` : ''}
           </div>
         </div>
         ${live && i.url ? `<button class="btn small ghost" data-msg="${i.id}">Mesaj</button>` : ''}
@@ -348,7 +413,7 @@ function renderInvites(list) {
   $('invites').querySelectorAll('[data-msg]').forEach((b) =>
     b.addEventListener('click', () => {
       const i = invites.find((x) => String(x.id) === b.dataset.msg);
-      copy(fillMessage(app.message, i, ttlDays), b);
+      copy(fillMessage(messageFor(i), i, ttlDays), b);
     }));
 
   $('invites').querySelectorAll('[data-unvite]').forEach((b) =>
@@ -375,6 +440,7 @@ function renderInvites(list) {
     return;
   }
   $('appsel').addEventListener('change', (e) => select(e.target.value));
+  $('invite-role').addEventListener('change', updateInviteProfile);
   select((location.hash || '').replace('#', '') || APPS[0].id);
   loadOverview();
 }());

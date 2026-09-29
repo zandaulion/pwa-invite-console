@@ -37,6 +37,13 @@ Two steps, neither of them here in the code.
    root. `message` is the invitation text, with `{link}` and `{days}`
    substituted; everything else is that app's own words.
 
+   An app may add `invite_profiles` to expose role choices only for that app.
+   Profiles use `value`, `label`, `description` and optional
+   `requires_child`. The console then reads children from
+   `GET /api/admin/invite-options` and sends the additive fields `role`,
+   `childId` and `accessExpiresAt` when applicable. Apps without profiles keep
+   sending the original `{label}` payload unchanged.
+
 Then `./deploy.sh`. No JavaScript changes.
 
 ### What an app has to expose
@@ -53,6 +60,13 @@ answering, under its prefix:
 | `GET /api/admin/invites` | `{invites: [{id, label, created_at, expires_at, used_at, device_id, code, url}], ttl_days}` |
 | `POST /api/admin/invites` | body `{label}` → `{code, url, expires_in_days}` |
 | `POST /api/admin/invites/{id}/revoke` | |
+
+Optional role-aware extension:
+
+| | |
+|---|---|
+| `GET /api/admin/invite-options` | `{children: [{id, name}]}` |
+| `POST /api/admin/invites` | may also accept `{role, childId, accessExpiresAt}` and return the selected access fields |
 
 `code` and `url` are expected to be null once an invite has been redeemed —
 the plaintext is wiped at that point, and the console hides the copy buttons

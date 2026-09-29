@@ -35,8 +35,22 @@
     <h2>Invitație nouă</h2>
     <div class="card">
       <form class="row-form" id="form-invite">
-        <input id="invite-label" placeholder="Pentru cine? (opțional)"
-               autocomplete="off" aria-label="Etichetă">
+        <div class="invite-fields">
+          <input id="invite-label" placeholder="Pentru cine? (opțional)"
+                 autocomplete="off" aria-label="Etichetă">
+          <div id="invite-access" class="invite-access" hidden>
+            <label>Tip acces
+              <select id="invite-role"></select>
+            </label>
+            <label id="invite-child-wrap" hidden>Copil
+              <select id="invite-child"></select>
+            </label>
+            <label id="invite-expiry-wrap" hidden>Acces până la
+              <input id="invite-expiry" type="date">
+            </label>
+            <p class="note" id="invite-role-note"></p>
+          </div>
+        </div>
         <button class="btn" type="submit">Creează invitație</button>
       </form>
       <div id="invite-result" hidden></div>
