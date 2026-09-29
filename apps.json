@@ -62,5 +62,45 @@
     "name": "Faceslice",
     "api": "/faceslice",
     "message": "Salut! Îți trimit acces la Faceslice — dintr-o poză, un portret în straturi, gata de tăiat pe CNC.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ → „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus din nou — codul se completează singur. Apasă „Activează”.\n\nCodul este valabil {days} zile și înregistrează un singur telefon."
+  },
+  {
+    "id": "stencil-cnc",
+    "name": "Stencil CNC",
+    "api": "/stencil-cnc",
+    "message": "Salut! Îți trimit acces la Stencil CNC — dintr-o poză, un șablon de tăiat pe CNC.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ → „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus din nou — codul se completează singur. Apasă „Activează”.\n\nCodul este valabil {days} zile și înregistrează un singur telefon."
+  },
+  {
+    "id": "casierul-clasei",
+    "name": "Casierul clasei",
+    "api": "/casierul-clasei",
+    "push": false,
+    "message": "Acces la Casierul clasei — evidența contribuțiilor și a banilor clasei.\n\nDeschide {link}, apoi apasă Activează.\n\nPoți instala aplicația pe ecranul principal. Codul este valabil {days} zile și înregistrează un singur dispozitiv al casierului.",
+    "invite_note": "Înregistrează un dispozitiv al casierului în aceeași clasă. Valabil {days} zile, o singură utilizare.",
+    "invite_profiles": [
+      {
+        "value": "treasurer",
+        "label": "Casier — acces complet",
+        "description": "Poate vedea și modifica întregul registru."
+      },
+      {
+        "value": "parent",
+        "label": "Părinte — doar citire",
+        "description": "Vede situația generală și numai datele copilului ales.",
+        "requires_child": true
+      },
+      {
+        "value": "auditor",
+        "label": "Auditor — doar citire",
+        "description": "Vede întregul registru și toate rapoartele, fără să poată modifica date."
+      }
+    ],
+    "invite_messages": {
+      "parent": "Acces doar pentru citire la Casierul clasei. Vei vedea situația generală a fondului și numai contribuțiile copilului tău.\n\nDeschide {link}, apoi apasă Activează.\n\nPoți instala aplicația pe ecranul principal. Codul este valabil {days} zile și se folosește o singură dată.",
+      "auditor": "Acces doar pentru citire la Casierul clasei. Vei putea verifica registrul complet și rapoartele, fără să modifici date.\n\nDeschide {link}, apoi apasă Activează.\n\nPoți instala aplicația pe ecranul principal. Codul este valabil {days} zile și se folosește o singură dată."
+    },
+    "invite_notes": {
+      "parent": "Acces doar pentru citire, limitat la copilul ales. Invitația este valabilă {days} zile și se folosește o singură dată.",
+      "auditor": "Acces complet pentru verificare, doar pentru citire. Invitația este valabilă {days} zile și se folosește o singură dată."
+    }
   }
 ]
