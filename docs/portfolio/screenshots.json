@@ -1,0 +1,123 @@
+{
+  "capturedAt": "2026-09-30T12:17:58.637Z",
+  "screenshots": [
+    {
+      "file": "01-desktop-devices-light.png",
+      "title": "Desktop · dispozitive",
+      "description": "Navigare între aplicații și permisiuni pentru dispozitive.",
+      "viewport": {
+        "width": 1440,
+        "height": 1120
+      },
+      "scale": 2,
+      "blurredLabels": 6,
+      "blurredFields": 14,
+      "documentWidth": 1440,
+      "viewportWidth": 1440,
+      "labelsProtected": true,
+      "visibleBlurredLabels": 3
+    },
+    {
+      "file": "02-desktop-invitations-light.png",
+      "title": "Desktop · invitații",
+      "description": "Stări, filtre și acțiuni pentru invitații.",
+      "viewport": {
+        "width": 1440,
+        "height": 1120
+      },
+      "scale": 2,
+      "blurredLabels": 37,
+      "blurredFields": 41,
+      "documentWidth": 1440,
+      "viewportWidth": 1440,
+      "labelsProtected": true,
+      "visibleBlurredLabels": 34
+    },
+    {
+      "file": "03-desktop-parent-invitation.png",
+      "title": "Desktop · opțiuni specifice",
+      "description": "Clasă, rol, copil și expirarea accesului în Casierul clasei.",
+      "viewport": {
+        "width": 1440,
+        "height": 1120
+      },
+      "scale": 2,
+      "blurredLabels": 6,
+      "blurredFields": 14,
+      "documentWidth": 1440,
+      "viewportWidth": 1440,
+      "labelsProtected": true,
+      "visibleBlurredLabels": 3
+    },
+    {
+      "file": "04-desktop-account-invitation-dark.png",
+      "title": "Desktop · temă întunecată",
+      "description": "Formular simplu pentru aplicațiile cu invitații pentru conturi.",
+      "viewport": {
+        "width": 1440,
+        "height": 1120
+      },
+      "scale": 2,
+      "blurredLabels": 21,
+      "blurredFields": 25,
+      "documentWidth": 1440,
+      "viewportWidth": 1440,
+      "labelsProtected": true,
+      "visibleBlurredLabels": 18
+    },
+    {
+      "file": "05-mobile-devices-light.png",
+      "title": "Mobil · dispozitive",
+      "description": "Lista de dispozitive adaptată pentru telefon.",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "scale": 2,
+      "blurredLabels": 6,
+      "blurredFields": 14,
+      "documentWidth": 430,
+      "viewportWidth": 430,
+      "labelsProtected": true,
+      "visibleBlurredLabels": 3
+    },
+    {
+      "file": "06-mobile-app-picker-dark.png",
+      "title": "Mobil · selector de aplicații",
+      "description": "Aplicațiile publice, cu pictograme și căutare, în selectorul mobil.",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "scale": 2,
+      "blurredLabels": 6,
+      "blurredFields": 14,
+      "documentWidth": 430,
+      "viewportWidth": 430,
+      "labelsProtected": true,
+      "visibleBlurredLabels": 3
+    },
+    {
+      "file": "07-mobile-parent-invitation.png",
+      "title": "Mobil · invitație contextuală",
+      "description": "Opțiunile pentru părinte într-un formular adaptat telefonului.",
+      "viewport": {
+        "width": 430,
+        "height": 932
+      },
+      "scale": 2,
+      "blurredLabels": 6,
+      "blurredFields": 14,
+      "documentWidth": 430,
+      "viewportWidth": 430,
+      "labelsProtected": true,
+      "visibleBlurredLabels": 3
+    }
+  ],
+  "privacy": "Names, invitation recipients, class/child labels and invite credentials were anonymized before rendering, then visually blurred. App names, counts and ordinary status/date metadata are retained. No live records were changed.",
+  "checks": {
+    "apiReads": 56,
+    "blockedMutations": 0,
+    "blockedExternal": 0
+  }
+}
