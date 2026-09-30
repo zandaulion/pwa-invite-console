@@ -22,6 +22,25 @@ Two steps, neither of them here in the code.
    }
    ```
 
+   Some apps expect a secret instead of the `X-Admin` marker. Inject that
+   secret here, on the private listener, and drop the marker — the page
+   itself still carries nothing:
+
+   ```caddyfile
+   handle /casierul-clasei/api/* {
+       uri strip_prefix /casierul-clasei
+       reverse_proxy 127.0.0.1:8118 {
+           header_up -X-Admin
+           header_up X-Admin-Token {env.CASIERUL_ADMIN_TOKEN}
+       }
+   }
+   ```
+
+   [Casierul clasei](https://github.com/zandaulion/casierul-clasei) works this
+   way; its `deploy.sh` writes this route and its `apps.json` entry itself
+   from `deploy/console-entry.json`, so that entry is the source of truth for
+   its texts.
+
 2. Add an entry to `apps.json`:
 
    ```json

@@ -74,13 +74,14 @@
     "name": "Casierul clasei",
     "api": "/casierul-clasei",
     "push": false,
-    "message": "Acces la Casierul clasei — evidența contribuțiilor și a banilor clasei.\n\nDeschide {link}, apoi apasă Activează.\n\nPoți instala aplicația pe ecranul principal. Codul este valabil {days} zile și înregistrează un singur dispozitiv al casierului.",
-    "invite_note": "Înregistrează un dispozitiv al casierului în aceeași clasă. Valabil {days} zile, o singură utilizare.",
+    "message": "Acces la Casierul clasei — evidența contribuțiilor și a banilor clasei.\n\nDeschide {link}, apoi apasă «Deschide registrul clasei».\n\nPoți instala aplicația pe ecranul principal. Același cod permite activarea a două dispozitive, de exemplu telefon și laptop, în cele {days} zile de valabilitate.",
+    "invite_note": "Alege clasa pentru acest acces. Invitația permite activarea a două dispozitive și este valabilă {days} zile de la emitere.",
     "invite_profiles": [
       {
         "value": "treasurer",
         "label": "Casier — acces complet",
-        "description": "Poate vedea și modifica întregul registru."
+        "description": "Poate vedea și modifica numai registrul clasei alese.",
+        "requires_child": true
       },
       {
         "value": "parent",
@@ -91,16 +92,18 @@
       {
         "value": "auditor",
         "label": "Auditor — doar citire",
-        "description": "Vede întregul registru și toate rapoartele, fără să poată modifica date."
+        "description": "Vede registrul și rapoartele clasei alese, fără modificări.",
+        "requires_child": true
       }
     ],
     "invite_messages": {
-      "parent": "Acces doar pentru citire la Casierul clasei. Vei vedea situația generală a fondului și numai contribuțiile copilului tău.\n\nDeschide {link}, apoi apasă Activează.\n\nPoți instala aplicația pe ecranul principal. Codul este valabil {days} zile și se folosește o singură dată.",
-      "auditor": "Acces doar pentru citire la Casierul clasei. Vei putea verifica registrul complet și rapoartele, fără să modifici date.\n\nDeschide {link}, apoi apasă Activează.\n\nPoți instala aplicația pe ecranul principal. Codul este valabil {days} zile și se folosește o singură dată."
+      "parent": "Acces doar pentru citire la Casierul clasei. Vei vedea situația generală a fondului și numai contribuțiile copilului tău.\n\nDeschide {link}, apoi apasă «Deschide registrul clasei».\n\nPoți instala aplicația pe ecranul principal. Același cod permite activarea a două dispozitive, de exemplu telefon și laptop, în cele {days} zile de valabilitate.",
+      "auditor": "Acces doar pentru citire la Casierul clasei. Vei putea verifica registrul și rapoartele clasei alese, fără să modifici date.\n\nDeschide {link}, apoi apasă «Deschide registrul clasei».\n\nPoți instala aplicația pe ecranul principal. Același cod permite activarea a două dispozitive, de exemplu telefon și laptop, în cele {days} zile de valabilitate."
     },
     "invite_notes": {
-      "parent": "Acces doar pentru citire, limitat la copilul ales. Invitația este valabilă {days} zile și se folosește o singură dată.",
-      "auditor": "Acces complet pentru verificare, doar pentru citire. Invitația este valabilă {days} zile și se folosește o singură dată."
+      "parent": "Alege copilul din clasa potrivită. Accesul este doar pentru citire, limitat la acel copil. Codul permite activarea a două dispozitive în {days} zile de la emitere.",
+      "auditor": "Alege opțiunea «întreaga clasă» pentru clasa dorită. Accesul este doar pentru citire. Codul permite activarea a două dispozitive în {days} zile de la emitere.",
+      "treasurer": "Alege opțiunea «întreaga clasă» pentru clasa dorită. Accesul permite modificarea registrului. Codul permite activarea a două dispozitive în {days} zile de la emitere."
     }
   }
 ]
