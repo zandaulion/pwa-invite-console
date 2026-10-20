@@ -232,6 +232,13 @@ entry point. No neighboring application checkout is required. Check scripts are
 excluded from deployment.
 
 
+## License
+
+This project is licensed under the **GNU General Public License, version 3
+or (at your option) any later version** (`GPL-3.0-or-later`). See [LICENSE](LICENSE)
+for the complete license text. Third-party components retain their own licenses
+and notices.
+
 ## Support and contributions
 
 Use this repository’s Issues for reproducible bugs and focused feature requests. Include the version, relevant runtime/browser, expected behavior and a minimal synthetic example. Remove credentials, personal records, device identifiers and deployment-specific values before sharing logs or screenshots.
