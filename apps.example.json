@@ -1,0 +1,11 @@
+[
+  {
+    "id": "demo",
+    "name": "Aplicație demonstrativă",
+    "description": "Exemplu sintetic de integrare",
+    "icon": "icons/icon-192.png",
+    "api": "/demo",
+    "invite_kind": "device",
+    "message": "Deschide invitația demonstrativă: {link}"
+  }
+]

@@ -1,4 +1,4 @@
-# Consolă admin
+# PWA Invite Console — Consolă admin
 
 One console for invitation and device administration across 12 PWAs. A
 searchable app sidebar on desktop becomes an app picker on mobile, while the
@@ -12,6 +12,32 @@ options. Other apps keep the simple device invitation flow.
 
 It lives in its own directory because it belongs to none of the apps it
 fronts.
+
+
+## Start here
+
+This is a static admin frontend, not an authentication server. Each connected app
+must implement the [invitation/device API contract](#what-an-app-has-to-expose).
+The UI is in Romanian. [Project overview](https://zandaulion.com/pwainvite.html).
+
+1. Serve the static files behind an authenticated private HTTPS listener.
+2. Replace the app list in your deployment with entries for your own backends;
+   [apps.example.json](apps.example.json) is a synthetic minimal example.
+3. Configure private proxy routes as in [Adding an app](#adding-an-app), using
+   the header/secret each backend actually expects. Keep secrets in the proxy’s
+   private environment, never in `apps.json` or JavaScript.
+4. Confirm the public listener cannot reach admin routes or inject admin headers,
+   then open the private console and create a disposable test invitation.
+
+`./deploy.sh` requires Bash, `rsync`, `sudo`, and an existing static-file/proxy
+configuration. It copies into `/var/www/pwa-invite-console` by default; `DEST`
+overrides that path. It does not install or configure the proxy. Use a dedicated
+directory: deployment synchronizes its contents with `rsync --delete`.
+
+For an unauthenticated visual preview on loopback only, run
+`python3 -m http.server 8765 --bind 127.0.0.1` and open
+<http://127.0.0.1:8765/>. This does not provide backend APIs or make admin access
+safe on a public host. Use synthetic app/device records for demonstrations.
 
 ## Adding an app
 
@@ -200,5 +226,16 @@ and desktop/mobile layouts. Screenshots are written to `/tmp` by default.
 The browser check uses Playwright and a local Chromium CDP endpoint at
 `http://127.0.0.1:9222`. Set `PLAYWRIGHT_MODULE` to its absolute module path
 and `CDP_URL` to override the endpoint, or set `BROWSER_LAUNCH=1` to start a
-local headless browser. This workspace also has a Playwright installation in
-the neighboring `stencil-cnc` project. Check scripts are excluded from deployment.
+local headless browser. Install Playwright in a separate local tools directory,
+install its Chromium browser, and set `PLAYWRIGHT_MODULE` to that package’s absolute
+entry point. No neighboring application checkout is required. Check scripts are
+excluded from deployment.
+
+
+## Support and contributions
+
+Use this repository’s Issues for reproducible bugs and focused feature requests. Include the version, relevant runtime/browser, expected behavior and a minimal synthetic example. Remove credentials, personal records, device identifiers and deployment-specific values before sharing logs or screenshots.
+
+Run `node scripts/update-check.mjs` and the documented browser check using synthetic records. Never use live invite links or blurred production screenshots as new public fixtures.
+
+Keep changes focused and update the affected documentation. Security-sensitive reports should follow [SECURITY.md](SECURITY.md).
