@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Pocket Omaha Review Radar: five fundamentals, a recurring review loop, and the thesis signal at its centre. -->
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#020617"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="135" y1="129" x2="377" y2="359" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#14B8A6"/>
+      <stop offset="1" stop-color="#06B6D4"/>
+    </linearGradient>
+    <radialGradient id="depth">
+      <stop stop-color="#06B6D4" stop-opacity=".10"/>
+      <stop offset="1" stop-color="#06B6D4" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="signal">
+      <stop stop-color="#FBBF24" stop-opacity=".58"/>
+      <stop offset="1" stop-color="#FBBF24" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#background)"/>
+  <circle cx="256" cy="255" r="170" fill="url(#depth)"/>
+  <circle cx="256" cy="256" r="183" fill="none" stroke="#1E293B" stroke-width="12"/>
+  <path d="M352.98 100.81 A183 183 0 1 1 175.77 91.54" fill="none" stroke="url(#brand)" stroke-width="17" stroke-linecap="round"/>
+  <path d="M256 129 L377 217 L331 359 L181 359 L135 217 Z" fill="#082F49" fill-opacity=".51" stroke="url(#brand)" stroke-width="11" stroke-linejoin="round"/>
+  <g fill="none" stroke="#236B80" stroke-opacity=".72" stroke-width="4">
+    <path d="M256 256 L256 129 M256 256 L377 217 M256 256 L331 359 M256 256 L181 359 M256 256 L135 217"/>
+  </g>
+  <path d="M256 160 L345 227 L303 321 L196 339 L188 234 Z" fill="#14B8A6" fill-opacity=".34" stroke="url(#brand)" stroke-width="7" stroke-linejoin="round"/>
+  <g fill="#2ADCE0">
+    <circle cx="256" cy="129" r="7"/><circle cx="377" cy="217" r="7"/><circle cx="331" cy="359" r="7"/><circle cx="181" cy="359" r="7"/><circle cx="135" cy="217" r="7"/>
+  </g>
+  <circle cx="256" cy="256" r="46" fill="url(#signal)"/>
+  <circle cx="256" cy="256" r="18" fill="#FBBF24"/>
+  <circle cx="256" cy="256" r="7" fill="#FFF3B4"/>
+</svg>

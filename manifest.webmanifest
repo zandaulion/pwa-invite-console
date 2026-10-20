@@ -2,13 +2,13 @@
   "id": "./",
   "name": "Consolă admin",
   "short_name": "Consolă",
-  "description": "Invitații și dispozitive pentru Întârzieri, wBP Digitizer și Termometru.",
+  "description": "Invitații, dispozitive și acces pentru toate aplicațiile PWA, într-o singură consolă.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#f5f7fb",
-  "theme_color": "#0f172a",
+  "background_color": "#f5f7f5",
+  "theme_color": "#f5f7f5",
   "icons": [
     {
       "src": "icons/icon-192.png",

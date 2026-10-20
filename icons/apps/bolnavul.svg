@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs><clipPath id="r"><rect width="512" height="512" rx="112"/></clipPath></defs>
+  <g clip-path="url(#r)">
+  <rect width="512" height="512" fill="#7a2a3f"/>
+  <!-- curtain swags -->
+  <path d="M0 0h512v70c-40 52-98 70-128 70S296 120 256 74c-40 46-98 66-128 66S40 122 0 70z" fill="#5c1d2f"/>
+  <path d="M0 0h512v40c-40 40-98 56-128 56S296 82 256 46c-40 36-98 50-128 50S40 80 0 40z" fill="#4a1625"/>
+  <!-- capsule -->
+  <g transform="rotate(-38 256 290)">
+    <rect x="136" y="232" width="240" height="116" rx="58" fill="#f6ead8"/>
+    <path d="M256 232h62a58 58 0 0 1 0 116h-62z" fill="#e0b55a"/>
+    <rect x="156" y="252" width="80" height="18" rx="9" fill="#fff" opacity=".55"/>
+  </g>
+  <!-- sparkles: imaginary -->
+  <path d="M392 360l9 22 22 9-22 9-9 22-9-22-22-9 22-9z" fill="#f6ead8"/>
+  <path d="M118 176l6 14 14 6-14 6-6 14-6-14-14-6 14-6z" fill="#e0b55a"/>
+  <path d="M150 398l5 11 11 5-11 5-5 11-5-11-11-5 11-5z" fill="#f6ead8" opacity=".8"/>
+</g>
+</svg>

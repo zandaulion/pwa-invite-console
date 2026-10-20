@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Background rounded canvas -->
+  <rect width="512" height="512" rx="115" fill="#2E7D32"/>
+  
+  <!-- Subtle ground shadow -->
+  <ellipse cx="256" cy="425" rx="180" ry="32" fill="#1B4D20" opacity="0.4"/>
+  
+  <g transform="translate(48, 40) scale(4.3)">
+    <!-- Spikes on back -->
+    <path d="M22 54 L15 47 L24 43 Z" fill="#DD6B20"/>
+    <path d="M28 40 L23 31 L32 29 Z" fill="#DD6B20"/>
+    <path d="M37 28 L35 18 L44 20 Z" fill="#DD6B20"/>
+    <path d="M49 20 L50 10 L58 16 Z" fill="#DD6B20"/>
+
+    <!-- Tail -->
+    <path d="M25 64 Q12 66 6 52 Q12 60 22 58 Z" fill="#48BB78"/>
+
+    <!-- Main Body & Head -->
+    <path d="M22 60 Q20 36 38 24 Q48 18 64 20 Q76 22 78 36 Q80 46 72 52 Q66 56 64 68 Q52 74 38 72 Q26 70 22 60 Z" fill="#48BB78"/>
+
+    <!-- Cute Round Belly -->
+    <path d="M34 68 Q44 72 56 66 Q60 58 58 48 Q44 46 34 54 Q30 62 34 68 Z" fill="#9AE6B4"/>
+
+    <!-- Feet -->
+    <rect x="30" y="68" width="10" height="12" rx="5" fill="#48BB78"/>
+    <rect x="48" y="68" width="10" height="12" rx="5" fill="#48BB78"/>
+    <circle cx="33" cy="80" r="1.5" fill="#FFFFFF"/>
+    <circle cx="37" cy="80" r="1.5" fill="#FFFFFF"/>
+    <circle cx="51" cy="80" r="1.5" fill="#FFFFFF"/>
+    <circle cx="55" cy="80" r="1.5" fill="#FFFFFF"/>
+
+    <!-- Little Arms -->
+    <path d="M52 54 Q60 56 62 52" stroke="#48BB78" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+
+    <!-- Eye & Happy Mouth -->
+    <circle cx="58" cy="38" r="4.5" fill="#15170F"/>
+    <circle cx="60" cy="36" r="1.5" fill="#FFFFFF"/>
+    <path d="M52 48 Q60 56 68 49" stroke="#15170F" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+    <!-- Golden Coin -->
+    <circle cx="70" cy="62" r="10" fill="#ECC94B" stroke="#B7791F" stroke-width="1.5"/>
+    <text x="70" y="65.5" font-size="10" font-weight="bold" fill="#744210" text-anchor="middle" font-family="system-ui">$</text>
+  </g>
+</svg>

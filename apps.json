@@ -3,31 +3,46 @@
     "id": "trains",
     "name": "Întârzieri",
     "api": "",
-    "message": "Salut! Îți trimit acces la Întârzieri — urmărește trenurile CFR și te\nanunță când întârzie.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ →\n  „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus\ndin nou — codul se completează singur. Apasă „Activează”.\n\nCodul e valabil {days} zile și înregistrează un singur telefon.\nNotificările merg doar din aplicația instalată."
+    "message": "Salut! Îți trimit acces la Întârzieri — urmărește trenurile CFR și te\nanunță când întârzie.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ →\n  „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus\ndin nou — codul se completează singur. Apasă „Activează”.\n\nCodul e valabil {days} zile și înregistrează un singur telefon.\nNotificările merg doar din aplicația instalată.",
+    "description": "Trenuri CFR și alerte de întârziere",
+    "icon": "icons/apps/trains.svg",
+    "invite_kind": "device"
   },
   {
     "id": "bp",
     "name": "wBP Digitizer",
     "api": "/bp",
-    "message": "Salut! Îți trimit acces la wBP Digitizer — o aplicație pentru urmărirea\ntensiunii arteriale. Măsurătorile rămân pe telefonul tău, nu se trimit nicăieri.\n\n1) Deschide linkul:\n{link}\n\n2) Pagina îți cere să adaugi aplicația pe ecranul principal. Fă asta:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ →\n  „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Apasă linkul de mai sus din nou. Dacă se deschide direct în aplicație,\ngata — e activată.\n\n4) Dacă se deschide tot în browser (pe iPhone așa se întâmplă), apasă pe\npagină „Copiază codul”, deschide aplicația de pe ecranul principal, apasă\nbutonul camerei (cel cu lacăt) și lipește codul acolo.\n\nLinkul poate fi deschis de câte ori e nevoie — nu se consumă nimic până\nnu introduci codul în aplicație. Valabil {days} zile, un singur telefon."
+    "message": "Salut! Îți trimit acces la wBP Digitizer — o aplicație pentru urmărirea\ntensiunii arteriale. Măsurătorile rămân pe telefonul tău, nu se trimit nicăieri.\n\n1) Deschide linkul:\n{link}\n\n2) Pagina îți cere să adaugi aplicația pe ecranul principal. Fă asta:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ →\n  „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Apasă linkul de mai sus din nou. Dacă se deschide direct în aplicație,\ngata — e activată.\n\n4) Dacă se deschide tot în browser (pe iPhone așa se întâmplă), apasă pe\npagină „Copiază codul”, deschide aplicația de pe ecranul principal, apasă\nbutonul camerei (cel cu lacăt) și lipește codul acolo.\n\nLinkul poate fi deschis de câte ori e nevoie — nu se consumă nimic până\nnu introduci codul în aplicație. Valabil {days} zile, un singur telefon.",
+    "description": "Jurnal de tensiune arterială",
+    "icon": "icons/apps/bp.svg",
+    "invite_kind": "device"
   },
   {
     "id": "thermo",
     "name": "Termometru",
     "api": "/thermo",
-    "message": "Salut! Îți trimit acces la Termometru — temperatura din casă, cu istoric\nși alerte când iese din interval.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ →\n  „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus\ndin nou — codul se completează singur. Apasă „Activează”.\n\nCodul e valabil {days} zile și înregistrează un singur telefon.\nNotificările merg doar din aplicația instalată."
+    "message": "Salut! Îți trimit acces la Termometru — temperatura din casă, cu istoric\nși alerte când iese din interval.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ →\n  „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus\ndin nou — codul se completează singur. Apasă „Activează”.\n\nCodul e valabil {days} zile și înregistrează un singur telefon.\nNotificările merg doar din aplicația instalată.",
+    "description": "Temperatura din casă și alerte",
+    "icon": "icons/apps/thermo.svg",
+    "invite_kind": "device"
   },
   {
     "id": "olx",
     "name": "OLX Deals",
     "api": "/olx",
-    "message": "Salut! Îți trimit acces la OLX Deals — alerte și oferte bune în timp real.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ →\n  „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus\ndin nou — codul se completează singur. Apasă „Activează”.\n\nCodul e valabil {days} zile și înregistrează un singur telefon.\nNotificările merg doar din aplicația instalată."
+    "message": "Salut! Îți trimit acces la OLX Deals — alerte și oferte bune în timp real.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ →\n  „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus\ndin nou — codul se completează singur. Apasă „Activează”.\n\nCodul e valabil {days} zile și înregistrează un singur telefon.\nNotificările merg doar din aplicația instalată.",
+    "description": "Oferte și alerte OLX",
+    "icon": "icons/apps/olx.png",
+    "invite_kind": "device"
   },
   {
     "id": "omaha",
     "name": "Pocket Omaha",
     "api": "/omaha",
-    "message": "Salut! Îți trimit acces la Pocket Omaha — monitorizare sănătate financiară și moat-uri pentru acțiuni.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n• Android (Chrome): butonul „Instalează” sau ⋮ → „Adaugă la ecranul principal”\n\n3) Deschide aplicația de pe ecranul principal și apasă „Activează”.\n\nCodul este valabil {days} zile și înregistrează un singur telefon."
+    "message": "Salut! Îți trimit acces la Pocket Omaha — monitorizare sănătate financiară și moat-uri pentru acțiuni.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n• Android (Chrome): butonul „Instalează” sau ⋮ → „Adaugă la ecranul principal”\n\n3) Deschide aplicația de pe ecranul principal și apasă „Activează”.\n\nCodul este valabil {days} zile și înregistrează un singur telefon.",
+    "description": "Monitorizarea companiilor din portofoliu",
+    "icon": "icons/apps/omaha.svg",
+    "invite_kind": "device"
   },
   {
     "id": "plate",
@@ -35,13 +50,19 @@
     "api": "/plate",
     "message": "Salut! Îți trimit acces la Plate — jurnal de calorii și macronutrienți.\nFotografiezi mâncarea, corectezi porția dacă știi cât a fost, gata.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ →\n  „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus\ndin nou — codul se completează singur. Apasă „Continue”.\n\nAplicația e în engleză. Codul e valabil {days} zile și creează un singur\ncont — poți adăuga apoi și alte telefoane, din aplicație.\n\nCa să știi: pozele cu mâncarea se trimit la Google ca să fie analizate.\nRestul — jurnalul, greutatea, pozele salvate — stă pe serverul meu și\nnu pleacă nicăieri. Nu are reclame și nu urmărește nimic.",
     "push": false,
-    "invite_note": "Creează un cont nou, expiră în {days} zile și se poate folosi o singură dată. Alte telefoane se adaugă din aplicație, nu cu o invitație nouă."
+    "invite_note": "Creează un cont nou, expiră în {days} zile și se poate folosi o singură dată. Alte telefoane se adaugă din aplicație, nu cu o invitație nouă.",
+    "description": "Jurnal de calorii și macronutrienți",
+    "icon": "icons/apps/plate.svg",
+    "invite_kind": "account"
   },
   {
     "id": "spendosaurus",
     "name": "Spendosaurus",
     "api": "/spendosaurus",
-    "message": "Salut! Îți trimit acces la Spendosaurus — urmărire cheltuieli mari de familie și estimări vs. costuri reale.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ → „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus din nou — codul se completează singur. Apasă „Activează”.\n\nCodul este valabil {days} zile și înregistrează un singur telefon."
+    "message": "Salut! Îți trimit acces la Spendosaurus — urmărire cheltuieli mari de familie și estimări vs. costuri reale.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ → „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus din nou — codul se completează singur. Apasă „Activează”.\n\nCodul este valabil {days} zile și înregistrează un singur telefon.",
+    "description": "Bugetul cheltuielilor de familie",
+    "icon": "icons/apps/spendosaurus.svg",
+    "invite_kind": "device"
   },
   {
     "id": "magpie",
@@ -49,25 +70,37 @@
     "api": "/magpie",
     "message": "Salut! Îți trimit acces la Magpie — un loc unde arunci ideile pe măsură ce\nîți vin, iar aplicația le pune cap la cap.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ →\n  „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus\ndin nou — codul se completează singur. Apasă „Continue”.\n\nAplicația e în engleză. Codul e valabil {days} zile și creează un singur\ncont — poți adăuga apoi și alte telefoane, din aplicație.\n\nCa să știi: ce scrii stă pe serverul meu și nu pleacă nicăieri. Nu are\nreclame și nu urmărește nimic.",
     "push": false,
-    "invite_note": "Creează un cont nou, expiră în {days} zile și se poate folosi o singură dată. Alte telefoane se adaugă din aplicație, nu cu o invitație nouă."
+    "invite_note": "Creează un cont nou, expiră în {days} zile și se poate folosi o singură dată. Alte telefoane se adaugă din aplicație, nu cu o invitație nouă.",
+    "description": "Idei, notițe și conexiuni",
+    "icon": "icons/apps/magpie.svg",
+    "invite_kind": "account"
   },
   {
     "id": "miscare",
     "name": "Mișcare",
     "api": "/miscare",
-    "message": "Salut! Îți trimit acces la Mișcare — exerciții fără fricțiuni, de la zero, în ritmul tău.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ → „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus din nou — codul se completează singur. Apasă „Activează”.\n\nCodul este valabil {days} zile și înregistrează un singur telefon."
+    "message": "Salut! Îți trimit acces la Mișcare — exerciții fără fricțiuni, de la zero, în ritmul tău.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ → „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus din nou — codul se completează singur. Apasă „Activează”.\n\nCodul este valabil {days} zile și înregistrează un singur telefon.",
+    "description": "Exerciții în ritmul tău",
+    "icon": "icons/apps/miscare.svg",
+    "invite_kind": "device"
   },
   {
     "id": "faceslice",
     "name": "Faceslice",
     "api": "/faceslice",
-    "message": "Salut! Îți trimit acces la Faceslice — dintr-o poză, un portret în straturi, gata de tăiat pe CNC.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ → „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus din nou — codul se completează singur. Apasă „Activează”.\n\nCodul este valabil {days} zile și înregistrează un singur telefon."
+    "message": "Salut! Îți trimit acces la Faceslice — dintr-o poză, un portret în straturi, gata de tăiat pe CNC.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ → „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus din nou — codul se completează singur. Apasă „Activează”.\n\nCodul este valabil {days} zile și înregistrează un singur telefon.",
+    "description": "Portrete în straturi pentru CNC",
+    "icon": "icons/apps/faceslice.svg",
+    "invite_kind": "device"
   },
   {
     "id": "stencil-cnc",
     "name": "Stencil CNC",
     "api": "/stencil-cnc",
-    "message": "Salut! Îți trimit acces la Stencil CNC — dintr-o poză, un șablon de tăiat pe CNC.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ → „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus din nou — codul se completează singur. Apasă „Activează”.\n\nCodul este valabil {days} zile și înregistrează un singur telefon."
+    "message": "Salut! Îți trimit acces la Stencil CNC — dintr-o poză, un șablon de tăiat pe CNC.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ → „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus din nou — codul se completează singur. Apasă „Activează”.\n\nCodul este valabil {days} zile și înregistrează un singur telefon.",
+    "description": "Șabloane pentru tăiere CNC",
+    "icon": "icons/apps/stencil-cnc.svg",
+    "invite_kind": "device"
   },
   {
     "id": "casierul-clasei",
@@ -81,19 +114,27 @@
         "value": "treasurer",
         "label": "Casier — acces complet",
         "description": "Poate vedea și modifica numai registrul clasei alese.",
-        "requires_child": true
+        "requires_child": false,
+        "short_label": "Casier",
+        "requires_expiry": false
       },
       {
         "value": "parent",
         "label": "Părinte — doar citire",
         "description": "Vede situația generală și numai datele copilului ales.",
-        "requires_child": true
+        "requires_child": true,
+        "short_label": "Părinte",
+        "requires_expiry": true,
+        "expiry_default": "school-year-end"
       },
       {
         "value": "auditor",
         "label": "Auditor — doar citire",
         "description": "Vede registrul și rapoartele clasei alese, fără modificări.",
-        "requires_child": true
+        "requires_child": false,
+        "short_label": "Auditor",
+        "requires_expiry": true,
+        "expiry_default": "school-year-end"
       }
     ],
     "invite_messages": {
@@ -101,9 +142,45 @@
       "auditor": "Acces doar pentru citire la Casierul clasei. Vei putea verifica registrul și rapoartele clasei alese, fără să modifici date.\n\nDeschide {link}, apoi apasă «Deschide registrul clasei».\n\nPoți instala aplicația pe ecranul principal. Același cod permite activarea a două dispozitive, de exemplu telefon și laptop, în cele {days} zile de valabilitate."
     },
     "invite_notes": {
-      "parent": "Alege copilul din clasa potrivită. Accesul este doar pentru citire, limitat la acel copil. Codul permite activarea a două dispozitive în {days} zile de la emitere.",
-      "auditor": "Alege opțiunea «întreaga clasă» pentru clasa dorită. Accesul este doar pentru citire. Codul permite activarea a două dispozitive în {days} zile de la emitere.",
-      "treasurer": "Alege opțiunea «întreaga clasă» pentru clasa dorită. Accesul permite modificarea registrului. Codul permite activarea a două dispozitive în {days} zile de la emitere."
-    }
+      "parent": "Alege clasa și copilul. Accesul este doar pentru citire, limitat la acel copil. Codul permite activarea a două dispozitive în {days} zile de la emitere.",
+      "auditor": "Alege clasa pentru verificarea registrului și a rapoartelor, doar pentru citire. Codul permite activarea a două dispozitive în {days} zile de la emitere.",
+      "treasurer": "Alege clasa al cărei registru poate fi modificat. Codul permite activarea a două dispozitive în {days} zile de la emitere."
+    },
+    "description": "Contribuții și registrul clasei",
+    "icon": "icons/apps/casierul-clasei.svg",
+    "invite_kind": "device",
+    "invite_scope": "classroom",
+    "device_delete_note": "Ștergerea elimină dispozitivul și permisiunile sale pentru toate clasele. Registrele și datele claselor se păstrează.",
+    "device_revoke_note": "Revocarea oprește accesul acestui dispozitiv la toate clasele sale. Accesul poate fi reactivat din consolă."
+  },
+  {
+    "id": "threadmark",
+    "name": "Threadmark",
+    "description": "Payments and meetings detected from selected WhatsApp chats",
+    "icon": "icons/apps/threadmark.svg",
+    "api": "/threadmark",
+    "invite_kind": "device",
+    "push": true,
+    "message": "Threadmark access:\n\n1) Open {link}\n2) Install the app.\n3) Activate this device with the invitation code.\n\nThe code is valid for {days} days and registers one device."
+  },
+  {
+    "id": "bolnavul",
+    "name": "Bolnavul închipuit",
+    "api": "/bolnavul",
+    "push": false,
+    "message": "Salut! Îți trimit „Bolnavul închipuit” de Molière — toată piesa, citită cu câte o voce pentru fiecare personaj. Poți urmări textul, sări la orice scenă și exersa un rol.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal:\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ → „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Deschide aplicația de pe ecranul principal și apasă linkul de mai sus din nou — codul se completează singur. Apasă „Activează”.\n\nPe Wi-Fi, din meniul ⋯, poți salva înregistrarea pe telefon ca s-o asculți și fără internet.\n\nCodul e valabil {days} zile și înregistrează un singur telefon.",
+    "description": "Audiobook Molière, cu text și repetiție pe roluri",
+    "icon": "icons/apps/bolnavul.svg",
+    "invite_kind": "device"
+  },
+  {
+    "id": "dwh",
+    "name": "Bank DWH Studio",
+    "api": "/dwh",
+    "push": false,
+    "message": "Salut! Îți trimit acces la Bank DWH Studio — pui întrebări în limbaj natural despre depozitul de date al băncii și primești SQL-ul și rezultatul.\n\n1) Deschide linkul:\n{link}\n\n2) Adaugă pagina pe ecranul principal (opțional):\n• Android (Chrome): butonul „Instalează” din banner, sau meniul ⋮ → „Adaugă la ecranul principal”\n• iPhone (Safari): butonul de partajare → „Add to Home Screen”\n\n3) Codul se completează singur. Apasă „Activate this device”.\n\nAplicația e în engleză. Codul e valabil {days} zile și înregistrează un singur dispozitiv.",
+    "description": "Întrebări în limbaj natural peste depozitul de date",
+    "icon": "icons/apps/dwh.svg",
+    "invite_kind": "device"
   }
 ]

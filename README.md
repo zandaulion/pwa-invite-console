@@ -1,15 +1,21 @@
 # Consolă admin
 
-One page for the invite and device administration of every app behind the
-invite mechanism. It is the only administration GUI — the apps used to carry
-one each, which meant three tabs open and three places to remember.
+One console for invitation and device administration across 12 PWAs. A
+searchable app sidebar on desktop becomes an app picker on mobile, while the
+selected app has separate Invitations and Devices views. Search and status
+filters keep each list manageable; the invitation form opens when needed.
+
+The console supports light and dark themes, uses the apps' own icons, and
+shows each app's access options only where they apply. Plate and Magpie
+create accounts; Casierul clasei adds class, role, child and access-expiry
+options. Other apps keep the simple device invitation flow.
 
 It lives in its own directory because it belongs to none of the apps it
 fronts.
 
 ## Adding an app
 
-Two steps, neither of them here in the code.
+Add the private API route, then describe the app in configuration.
 
 1. Route its admin API on the private listener, injecting the header:
 
@@ -47,23 +53,53 @@ Two steps, neither of them here in the code.
    {
      "id": "newapp",
      "name": "Aplicație nouă",
+     "description": "O scurtă descriere a aplicației",
+     "icon": "icons/apps/newapp.svg",
      "api": "/newapp",
+     "invite_kind": "device",
      "message": "Salut! …\n\n1) Deschide linkul:\n{link}\n\n… Valabil {days} zile."
    }
    ```
 
-   `api` is the prefix on this listener — `""` if the app is mounted at its
-   root. `message` is the invitation text, with `{link}` and `{days}`
-   substituted; everything else is that app's own words.
-
-   An app may add `invite_profiles` to expose role choices only for that app.
-   Profiles use `value`, `label`, `description` and optional
-   `requires_child`. The console then reads children from
-   `GET /api/admin/invite-options` and sends the additive fields `role`,
-   `childId` and `accessExpiresAt` when applicable. Apps without profiles keep
-   sending the original `{label}` payload unchanged.
+   Copy the app's existing icon into `icons/apps/`. `api` is the prefix on
+   this listener — `""` if the app is mounted at its root. `message` is the
+   invitation text, with `{link}` and `{days}` substituted; everything else
+   is that app's own words.
 
 Then `./deploy.sh`. No JavaScript changes.
+
+### App capabilities
+
+The form and lists derive their options from the selected app's entry in
+`apps.json`:
+
+| Field | Meaning |
+|---|---|
+| `description`, `icon` | Short app description and a relative local icon path |
+| `invite_kind` | `device` for device activation, or `account` for a new account |
+| `push` | Set to `false` to hide notification status for apps without push |
+| `invite_note` | Invitation help text, with `{days}` substituted |
+| `invite_profiles` | Optional role choices, described below |
+| `invite_scope` | Set to `classroom` for a separate class selector |
+| `invite_messages`, `invite_notes` | Role-keyed overrides of the invitation message and help text |
+| `device_delete_note`, `device_revoke_note` | App-specific explanations of device actions |
+
+Profiles use `value`, `label`, `short_label`, `description`,
+`requires_child` and `requires_expiry`. An expiring profile may set
+`expiry_default: "school-year-end"`. The invitation's redemption deadline
+and the granted access expiry are separate values.
+
+For Casierul clasei, choose a class first, then a role. Only the parent role
+requires a child; parent and auditor roles require an access-expiry date.
+The console displays each device's permissions across its classes and the
+number of invitation activations used, including partially redeemed codes.
+Revoking a device blocks all of its classes; deleting it removes its
+permissions while preserving the class ledgers.
+
+Casierul also carries a copy of its definition in
+`../casierul-clasei/deploy/console-entry.json`. Keep that entry in sync when
+changing its capabilities: a Casierul deployment merges it into the deployed
+console configuration, replacing the profile array.
 
 ### What an app has to expose
 
@@ -85,11 +121,24 @@ Optional role-aware extension:
 | | |
 |---|---|
 | `GET /api/admin/invite-options` | `{children: [{id, name}]}` |
-| `POST /api/admin/invites` | may also accept `{role, childId, accessExpiresAt}` and return the selected access fields |
+| `POST /api/admin/invites` | may also accept `{role, childId, accessExpiresAt, classroomId}` and return the selected access fields |
 
-`code` and `url` are expected to be null once an invite has been redeemed —
-the plaintext is wiped at that point, and the console hides the copy buttons
-accordingly.
+Apps without profiles continue to receive the original `{label}` payload.
+The class-aware options adapter understands `classroom:<classroomId>`
+entries and `child:<classroomId>:<childId>` entries from Casierul's existing
+options endpoint. It presents them as separate class and child controls and
+sends `classroomId` explicitly.
+
+Casierul device responses include
+`permissions: [{classroom_id, classroom_label, role, child_id, child_label,
+access_expires_at}]`. These permissions take precedence over the device's
+legacy single-role fields and can include expired access. Its invite
+responses include `max_uses` and `use_count`; active codes remain available
+until all allowed activations are used.
+
+`code` and `url` become null once an invite is fully redeemed or revoked.
+The console hides the copy buttons when no code is available or the
+invitation is no longer usable.
 
 Pruning is deliberately not here. `admin.sh prune` and `prune-devices` delete
 in bulk with nothing to confirm per row, which is a poor fit for a page that
@@ -100,9 +149,11 @@ time one of them changed.
 
 ## Security
 
-The page carries no credential. The private listener injects `X-Admin` on the
-way to each API, and the public surfaces both 404 `/api/admin/*` and strip that
-header. Serving this anywhere else reaches nothing.
+The page carries no credential. The private listener injects the admin
+header required by each backend (`X-Admin` for the shared invite mechanism;
+`X-Admin-Token` for Casierul). Public surfaces reject `/api/admin/*` and do not
+forward client-supplied admin credentials. Serving this anywhere else
+reaches nothing.
 
 All the servers sit behind that one listener under different prefixes, so a
 single origin drives them and no CORS is involved.
@@ -134,3 +185,20 @@ a local network; revalidating costs nothing.
 ```bash
 ./deploy.sh          # -> /var/www/pwa-invite-console, served at /invites/
 ```
+
+## Checks
+
+`node scripts/update-check.mjs` checks that background updates preserve an
+unfinished invitation, including when a phone is locked or the tab is hidden.
+
+`node scripts/browser-check.mjs` exercises the console against synthetic
+apps and records. All browser requests are intercepted, so these checks never
+read or change live app data. It covers invitation payloads, class-specific
+fields, device actions, switching apps during requests, dates, error recovery,
+and desktop/mobile layouts. Screenshots are written to `/tmp` by default.
+
+The browser check uses Playwright and a local Chromium CDP endpoint at
+`http://127.0.0.1:9222`. Set `PLAYWRIGHT_MODULE` to its absolute module path
+and `CDP_URL` to override the endpoint, or set `BROWSER_LAUNCH=1` to start a
+local headless browser. This workspace also has a Playwright installation in
+the neighboring `stencil-cnc` project. Check scripts are excluded from deployment.

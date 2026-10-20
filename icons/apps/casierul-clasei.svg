@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Portofel cu monedă în lei">
+  <rect width="512" height="512" fill="#205d42"/>
+  <circle cx="256" cy="174" r="76" fill="#f5f4ee"/>
+  <circle cx="256" cy="174" r="62" fill="#e5b95f"/>
+  <circle cx="256" cy="174" r="50" fill="none" stroke="#205d42" stroke-width="7" opacity=".22"/>
+  <text x="256" y="188" text-anchor="middle" font-family="DejaVu Sans,Arial,sans-serif" font-size="43" font-weight="700" letter-spacing="1" fill="#205d42">LEI</text>
+  <path d="M132 213h248c23 0 40 18 40 40v120c0 22-17 40-40 40H132c-23 0-40-18-40-40V253c0-22 17-40 40-40Z" fill="#f5f4ee"/>
+  <path d="M132 213h248c23 0 40 18 40 40v9H92v-9c0-22 17-40 40-40Z" fill="#dfe9e1"/>
+  <g fill="#205d42">
+    <circle cx="138" cy="300" r="8"/>
+    <circle cx="138" cy="340" r="8"/>
+    <circle cx="138" cy="380" r="8"/>
+    <rect x="160" y="292" width="92" height="16" rx="8"/>
+    <rect x="160" y="332" width="70" height="16" rx="8"/>
+    <rect x="160" y="372" width="101" height="16" rx="8"/>
+  </g>
+  <path d="M333 277h87v96h-87c-27 0-48-21-48-48s21-48 48-48Z" fill="#205d42"/>
+  <circle cx="337" cy="325" r="12" fill="#e5b95f"/>
+</svg>

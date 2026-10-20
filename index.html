@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Consolă admin</title>
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#0f172a">
+<meta name="theme-color" content="#f5f7f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111a16" media="(prefers-color-scheme: dark)">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
@@ -15,67 +16,88 @@
 <link rel="stylesheet" href="console.css">
 </head>
 <body>
-<div class="wrap">
-
-  <header class="hero">
-    <div>
-      <h1>Consolă admin</h1>
-      <p class="sub">Doar prin tailnet — accesul la această pagină este
-        autentificarea.</p>
-    </div>
-  </header>
-
-  <div class="picker">
-    <label for="appsel">Aplicație</label>
-    <select id="appsel"></select>
-    <p class="picker-sub" id="appsub"></p>
-  </div>
-
-  <section class="block">
-    <h2>Invitație nouă</h2>
-    <div class="card">
-      <form class="row-form" id="form-invite">
-        <div class="invite-fields">
-          <input id="invite-label" placeholder="Pentru cine? (opțional)"
-                 autocomplete="off" aria-label="Etichetă">
-          <div id="invite-access" class="invite-access" hidden>
-            <label>Tip acces
-              <select id="invite-role"></select>
-            </label>
-            <label id="invite-child-wrap" hidden>Copil
-              <select id="invite-child"></select>
-            </label>
-            <label id="invite-expiry-wrap" hidden>Acces până la
-              <input id="invite-expiry" type="date">
-            </label>
-            <p class="note" id="invite-role-note"></p>
-          </div>
+<a class="skip-link" href="#workspace">Mergi la conținut</a>
+<div class="app-shell">
+  <aside class="sidebar" aria-label="Aplicații">
+    <a class="brand" href="./" aria-label="Consolă admin, pagina principală">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><path d="M17.5 14v7m-3.5-3.5h7"/></svg></span>
+      <span>Consolă<span class="brand-subtitle">Administrare acces</span></span>
+    </a>
+    <div class="sidebar-heading"><h2>Aplicațiile tale</h2><span id="app-count" class="count">—</span></div>
+    <div class="search-field sidebar-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg><label class="sr-only" for="app-search">Caută o aplicație</label><input id="app-search" type="search" placeholder="Caută o aplicație" autocomplete="off" spellcheck="false"></div>
+    <nav id="app-list" class="app-list" aria-label="Alege aplicația"><p class="loading-note">Se încarcă aplicațiile…</p></nav>
+    <div class="sidebar-footer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><span>Acces privat prin tailnet</span></div>
+  </aside>
+  <div class="main-column">
+    <header class="mobile-header">
+      <span class="mobile-brand"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><path d="M17.5 14v7m-3.5-3.5h7"/></svg>Consolă</span>
+      <button id="open-picker" class="app-switcher" type="button" aria-haspopup="dialog" aria-controls="app-picker"><span id="mobile-app-name">Alege aplicația</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 9 4-4 4 4m-8 6 4 4 4-4"/></svg></button>
+    </header>
+    <main id="workspace" class="workspace" tabindex="-1">
+      <p class="eyebrow">Administrare acces</p>
+      <header class="workspace-header">
+        <div class="app-heading">
+          <div id="app-avatar" class="app-avatar" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5"/></svg></div>
+          <div class="app-heading-copy"><h1 id="app-title">Aplicațiile tale</h1><p id="app-description">Invitații și dispozitive, într-un singur loc.</p></div>
         </div>
-        <button class="btn" type="submit">Creează invitație</button>
-      </form>
-      <div id="invite-result" hidden></div>
-      <p class="err" id="invite-err" hidden></p>
-    </div>
-  </section>
-
-  <section class="block">
-    <h2>Dispozitive</h2>
-    <div class="card" id="devices"><p class="empty">Se încarcă…</p></div>
-  </section>
-
-  <section class="block">
-    <h2>Invitații</h2>
-    <div class="card" id="invites"><p class="empty">Se încarcă…</p></div>
-  </section>
-
-  <p class="foot" id="foot"></p>
-
+        <div class="workspace-actions">
+          <button id="refresh" class="icon-button refresh-button" type="button" aria-label="Reîncarcă datele" title="Reîncarcă datele"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6.1 7a7 7 0 0 1 11.5-1L20 9M4 15l2.4 3A7 7 0 0 0 17.9 17"/></svg></button>
+          <button id="new-invite" class="btn primary" type="button" aria-haspopup="dialog" aria-controls="invite-dialog" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Invitație nouă</span></button>
+        </div>
+      </header>
+      <p id="app-summary" class="app-summary" aria-live="polite">Se încarcă datele…</p>
+      <section class="records-workspace" aria-label="Accesul la aplicație">
+        <div class="tabs" role="tablist" aria-label="Tipul înregistrărilor">
+          <button id="tab-invites" class="tab is-active" type="button" role="tab" aria-selected="true" aria-controls="invites"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg><span>Invitații</span></button>
+          <button id="tab-devices" class="tab" type="button" role="tab" aria-selected="false" aria-controls="devices" tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18h2"/></svg><span>Dispozitive</span></button>
+        </div>
+        <div class="list-toolbar">
+          <div class="search-field list-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg><label class="sr-only" for="list-search">Caută în lista curentă</label><input id="list-search" type="search" placeholder="Caută după nume sau etichetă" autocomplete="off" spellcheck="false"></div>
+          <div class="filter-field"><label class="sr-only" for="list-filter">Filtrează după stare</label><select id="list-filter"><option value="all">Toate stările</option></select><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></div>
+        </div>
+        <p id="results-caption" class="results-caption" aria-live="polite">Se încarcă…</p>
+        <div id="list-error" class="list-error" role="alert" hidden><p id="list-error-text"></p><button id="retry-load" class="btn secondary small" type="button">Încearcă din nou</button></div>
+        <div id="invites" class="records" role="tabpanel" aria-labelledby="tab-invites" tabindex="0"><div class="empty-state"><p>Se încarcă invitațiile…</p></div></div>
+        <div id="devices" class="records" role="tabpanel" aria-labelledby="tab-devices" tabindex="0" hidden></div>
+      </section>
+      <p id="foot" class="workspace-footer">Invitații și dispozitive · Consolă admin</p>
+    </main>
+  </div>
 </div>
+<dialog id="app-picker" class="picker-dialog" aria-labelledby="picker-title">
+  <div class="dialog-header"><div><p class="eyebrow">Aplicațiile tale</p><h2 id="picker-title">Alege aplicația</h2></div><button id="close-picker" class="icon-button" type="button" aria-label="Închide selectorul de aplicații"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+  <div class="search-field picker-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg><label class="sr-only" for="mobile-app-search">Caută o aplicație</label><input id="mobile-app-search" type="search" placeholder="Caută o aplicație" autocomplete="off" spellcheck="false"></div>
+  <nav id="mobile-app-list" class="app-list" aria-label="Alege aplicația"></nav>
+</dialog>
+<dialog id="invite-dialog" class="invite-dialog" aria-labelledby="invite-dialog-title" aria-describedby="invite-dialog-app">
+  <div class="dialog-header"><div><p id="invite-dialog-app" class="eyebrow">Aplicație</p><h2 id="invite-dialog-title">Invitație nouă</h2></div><button id="close-invite" class="icon-button" type="button" aria-label="Închide invitația"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+  <form id="form-invite" class="invite-form">
+    <label class="field-label" for="invite-label">Pentru cine? <span class="optional">Opțional</span></label>
+    <input id="invite-label" type="text" placeholder="Nume sau o etichetă ușor de recunoscut" autocomplete="off" maxlength="200">
+    <div id="invite-access" class="invite-access" hidden>
+      <label id="invite-class-wrap" class="field-label" hidden>Clasă<select id="invite-class"></select></label>
+      <label id="invite-role-wrap" class="field-label">Tip de acces<select id="invite-role"></select></label>
+      <label id="invite-child-wrap" class="field-label" hidden>Copil<select id="invite-child"></select></label>
+      <label id="invite-expiry-wrap" class="field-label" hidden>Acces până la<input id="invite-expiry" type="date"></label>
+      <p id="invite-role-note" class="note"></p>
+    </div>
+    <p id="invite-form-note" class="note form-note">Creează invitația, apoi trimite linkul persoanei pe care vrei să o inviți.</p>
+    <div class="form-footer"><button id="invite-submit" class="btn primary" type="submit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Creează invitație</span></button></div>
+  </form>
+  <p id="invite-err" class="error-message" role="alert" hidden></p>
+  <div id="invite-result" aria-live="polite" hidden></div>
+  <button id="invite-create-another" class="btn secondary create-another" type="button" hidden>Creează altă invitație</button>
+</dialog>
+<div id="toast" class="toast" role="status" hidden></div>
 <script src="console.js"></script>
 <script type="module">
-  // Its own module, so the app script can stay a classic script.
   import { installUpdates } from './pwa-update.js';
-  installUpdates({ appName: 'Invite Console', scriptUrl: 'sw.js' });
+  installUpdates({
+    appName: 'Consolă admin',
+    message: 'Consola a fost actualizată.',
+    scriptUrl: 'sw.js',
+    isBusy: () => !!document.querySelector('#invite-dialog[open]')
+  });
 </script>
 </body>
 </html>

@@ -63,8 +63,7 @@ function defaultToast(message) {
  *        with no notification of its own still says something.
  * @param {() => boolean} [options.isBusy]
  *        Return true while reloading would lose the person's work. The update
- *        waits until this goes false, or until they leave the tab -- at which
- *        point nothing is on screen to lose.
+ *        waits until this goes false, including while the tab is hidden.
  * @param {string} [options.scriptUrl]  Defaults to '/sw.js'.
  */
 export function installUpdates({
@@ -110,11 +109,12 @@ export function installUpdates({
     });
 
     let reloading = false;
+    let settle = null;
     const reload = () => {
       if (reloading) return;
       reloading = true;
       // Read on the way back up, by the block at the top of this function.
-      sessionStorage.setItem(RELOADED_KEY, '1');
+      try { sessionStorage.setItem(RELOADED_KEY, '1'); } catch {}
       location.reload();
     };
 
@@ -129,16 +129,12 @@ export function installUpdates({
 
       if (!isBusy()) return reload();
 
-      // Mid-something. Wait for a moment when there is nothing to lose: either
-      // the work finishes, or they leave the tab and the screen stops
-      // mattering.
-      const settle = setInterval(() => {
+      // Switching apps or locking a phone must not discard an unfinished
+      // invitation. The page remains busy until its form actually closes.
+      if (settle !== null) return;
+      settle = setInterval(() => {
         if (!isBusy()) { clearInterval(settle); reload(); }
       }, 2000);
-
-      document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'hidden') { clearInterval(settle); reload(); }
-      }, { once: true });
     });
   };
 
