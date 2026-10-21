@@ -20,6 +20,12 @@ This is a static admin frontend, not an authentication server. Each connected ap
 must implement the [invitation/device API contract](#what-an-app-has-to-expose).
 The UI is in Romanian. [Project overview](https://zandaulion.com/pwainvite.html).
 
+For a portable, generic copy, download the [v0.1.0 self-hosting ZIP and SHA256SUMS](https://github.com/zandaulion/pwa-invite-console/releases/tag/v0.1.0).
+It contains a synthetic one-app configuration and the complete static runtime.
+Follow [the bundle guide](RELEASE.md) to preview it locally or connect your own
+backends behind a private authenticated HTTPS listener. The packaged example
+does not include a working backend or the owner-specific `apps.json` in this repo.
+
 1. Serve the static files behind an authenticated private HTTPS listener.
 2. Replace the app list in your deployment with entries for your own backends;
    [apps.example.json](apps.example.json) is a synthetic minimal example.
@@ -213,6 +219,10 @@ a local network; revalidating costs nothing.
 ```
 
 ## Checks
+
+Build the generic release from a clean tagged checkout with
+`python3 scripts/build-release.py /tmp/pwa-invite-release`. Its ZIP includes
+only the allowlisted static runtime and `apps.example.json` as `site/apps.json`.
 
 `node scripts/update-check.mjs` checks that background updates preserve an
 unfinished invitation, including when a phone is locked or the tab is hidden.
